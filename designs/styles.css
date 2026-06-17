@@ -1,0 +1,443 @@
+@import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700;800&display=swap');
+
+:root {
+  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-mono: 'Fira Code', monospace;
+  
+  /* Obsidian Dark & Slate Gray Theme */
+  --bg-main: #0b0f17;
+  --bg-sidebar: #111827;
+  --bg-editor: #161b26;
+  --bg-panel: #1f293d;
+  --bg-active: #2d3748;
+  
+  --border-dim: #1f2937;
+  --border-medium: #374151;
+  --border-focus: #8b5cf6; /* Vibrant violet */
+  
+  --accent: #8b5cf6;
+  --accent-light: #a78bfa;
+  --accent-glow: rgba(139, 92, 246, 0.25);
+  --accent-glow-subtle: rgba(139, 92, 246, 0.08);
+  
+  --text-main: #f3f4f6;
+  --text-muted: #9ca3af;
+  --text-dark: #6b7280;
+  --text-link: #a78bfa;
+  
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  --shadow-premium: 0 20px 25px -5px rgba(0, 0, 0, 0.35), 0 10px 10px -5px rgba(0, 0, 0, 0.2);
+  
+  --transition-elastic: cubic-bezier(0.68, -0.6, 0.32, 1.6);
+  --transition-smooth: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Custom Scrollbar Styling */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg-main);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--border-medium);
+  border-radius: 9999px;
+  transition: background 0.2s ease;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--accent);
+}
+
+/* Base resets & typography */
+body {
+  font-family: var(--font-sans);
+  background-color: var(--bg-main);
+  color: var(--text-main);
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+pre, code {
+  font-family: var(--font-mono) !important;
+}
+
+/* Custom transitions and utility animations */
+.elastic-transition {
+  transition: all 0.3s var(--transition-elastic);
+}
+
+.smooth-transition {
+  transition: all 0.2s var(--transition-smooth);
+}
+
+/* Elastic Button & Interaction States */
+.btn-elastic {
+  transition: all 0.25s var(--transition-elastic);
+}
+.btn-elastic:hover {
+  transform: translateY(-2px) scale(1.02);
+  box-shadow: 0 4px 12px var(--accent-glow);
+}
+.btn-elastic:active {
+  transform: translateY(1px) scale(0.98);
+}
+
+/* Tab Transition Utilities */
+.tab-panel {
+  opacity: 0;
+  transform: translateY(8px);
+  animation: tabFadeIn 0.3s var(--transition-smooth) forwards;
+}
+
+@keyframes tabFadeIn {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Auto-Saving Glow Indicator Pulse */
+@keyframes savePulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.4);
+    background-color: rgb(16, 185, 129);
+  }
+  70% {
+    box-shadow: 0 0 0 6px rgba(16, 185, 129, 0);
+    background-color: rgb(16, 185, 129);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(16, 185, 129, 0);
+    background-color: rgb(16, 185, 129);
+  }
+}
+
+.saving-pulse {
+  animation: savePulse 1.5s infinite var(--transition-smooth);
+}
+
+/* Custom Obsidian Premium Markdown Preview Rendering */
+.obsidian-preview {
+  color: #e5e7eb;
+  line-height: 1.7;
+  font-size: 0.975rem;
+}
+
+.obsidian-preview h1, 
+.obsidian-preview h2, 
+.obsidian-preview h3, 
+.obsidian-preview h4, 
+.obsidian-preview h5, 
+.obsidian-preview h6 {
+  color: #ffffff;
+  font-weight: 700;
+  margin-top: 1.5rem;
+  margin-bottom: 0.75rem;
+  letter-spacing: -0.025em;
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.obsidian-preview h1 {
+  font-size: 1.8rem;
+  border-bottom: 1px solid var(--border-medium);
+  padding-bottom: 0.4rem;
+}
+
+.obsidian-preview h2 {
+  font-size: 1.4rem;
+  border-bottom: 1px solid var(--border-dim);
+  padding-bottom: 0.3rem;
+}
+
+.obsidian-preview h3 { font-size: 1.2rem; }
+.obsidian-preview h4 { font-size: 1.05rem; }
+
+/* Obsidian header-anchor subtle hashtag indicators */
+.obsidian-preview h1::after,
+.obsidian-preview h2::after,
+.obsidian-preview h3::after {
+  content: "#";
+  color: var(--accent-light);
+  opacity: 0;
+  margin-left: 0.5rem;
+  font-size: 0.85em;
+  font-weight: 400;
+  font-family: var(--font-mono);
+  transition: opacity 0.2s ease;
+}
+
+.obsidian-preview h1:hover::after,
+.obsidian-preview h2:hover::after,
+.obsidian-preview h3:hover::after {
+  opacity: 0.5;
+}
+
+/* Paragraphs and Inline elements */
+.obsidian-preview p {
+  margin-bottom: 1.1rem;
+}
+
+.obsidian-preview strong {
+  color: #ffffff;
+  font-weight: 600;
+}
+
+.obsidian-preview em {
+  color: #e5e7eb;
+  font-style: italic;
+}
+
+.obsidian-preview mark {
+  background: var(--accent-glow);
+  color: var(--accent-light);
+  padding: 0.1rem 0.3rem;
+  border-radius: 4px;
+  border: 1px solid rgba(139, 92, 246, 0.4);
+}
+
+/* Inline Code Styling */
+.obsidian-preview :not(pre) > code {
+  background-color: var(--bg-main);
+  color: #f472b6;
+  font-size: 0.875rem;
+  padding: 0.2rem 0.4rem;
+  border-radius: 5px;
+  border: 1px solid var(--border-medium);
+  word-break: break-all;
+}
+
+/* Keyboard keys style */
+.obsidian-preview kbd {
+  background-color: var(--bg-panel);
+  border: 1px solid var(--border-medium);
+  border-radius: 4px;
+  box-shadow: 0 1px 0 rgba(0,0,0,0.5);
+  color: var(--text-main);
+  font-family: var(--font-sans);
+  font-size: 0.75rem;
+  padding: 0.15rem 0.4rem;
+}
+
+/* Beautiful Blockquotes with Violet Accent */
+.obsidian-preview blockquote {
+  background: linear-gradient(to right, var(--accent-glow-subtle), transparent);
+  border-left: 3px solid var(--accent);
+  padding: 0.75rem 1.25rem;
+  margin: 1.25rem 0;
+  color: #d1d5db;
+  border-radius: 0 8px 8px 0;
+  font-style: italic;
+}
+
+/* Custom premium list & task list structures */
+.obsidian-preview ul {
+  list-style-type: none;
+  padding-left: 1.25rem;
+  margin-bottom: 1rem;
+}
+
+.obsidian-preview ul li {
+  position: relative;
+  margin-bottom: 0.4rem;
+}
+
+.obsidian-preview ul li::before {
+  content: "•";
+  color: var(--accent);
+  font-weight: bold;
+  font-size: 1.1rem;
+  position: absolute;
+  left: -1rem;
+  top: -0.05rem;
+}
+
+.obsidian-preview ol {
+  list-style-type: decimal;
+  padding-left: 1.25rem;
+  margin-bottom: 1rem;
+}
+
+.obsidian-preview ol li {
+  margin-bottom: 0.4rem;
+  padding-left: 0.25rem;
+}
+
+/* Customized interactive-style task checkmarks */
+.obsidian-preview .task-list-item {
+  list-style-type: none;
+  position: relative;
+  padding-left: 0.5rem;
+}
+
+.obsidian-preview .task-list-item::before {
+  display: none !important;
+}
+
+.obsidian-preview input[type="checkbox"] {
+  appearance: none;
+  background-color: var(--bg-main);
+  border: 1px solid var(--border-medium);
+  border-radius: 4px;
+  width: 1rem;
+  height: 1rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  vertical-align: middle;
+  margin-right: 0.5rem;
+  cursor: pointer;
+  position: relative;
+  transition: all 0.2s ease;
+}
+
+.obsidian-preview input[type="checkbox"]:checked {
+  background-color: var(--accent);
+  border-color: var(--accent);
+}
+
+.obsidian-preview input[type="checkbox"]:checked::after {
+  content: "✓";
+  color: #fff;
+  font-size: 0.7rem;
+  font-weight: bold;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.obsidian-preview .task-list-item-done {
+  text-decoration: line-through;
+  color: var(--text-dark);
+}
+
+/* Premium Table Styles */
+.obsidian-preview table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  margin: 1.5rem 0;
+  border-radius: 8px;
+  overflow: hidden;
+  border: 1px solid var(--border-dim);
+}
+
+.obsidian-preview th {
+  background-color: var(--bg-panel);
+  color: #ffffff;
+  font-weight: 600;
+  padding: 0.75rem 1rem;
+  text-align: left;
+  border-bottom: 2px solid var(--border-medium);
+}
+
+.obsidian-preview td {
+  padding: 0.75rem 1rem;
+  background-color: var(--bg-editor);
+  border-bottom: 1px solid var(--border-dim);
+  color: var(--text-main);
+  transition: background-color 0.15s ease;
+}
+
+.obsidian-preview tr:last-child td {
+  border-bottom: none;
+}
+
+.obsidian-preview tr:hover td {
+  background-color: var(--bg-panel);
+}
+
+/* Beautiful Fira Code block styling */
+.obsidian-preview pre {
+  background-color: var(--bg-sidebar) !important;
+  border: 1px solid var(--border-dim);
+  border-radius: 8px;
+  padding: 1.25rem;
+  margin: 1.5rem 0;
+  overflow-x: auto;
+  position: relative;
+  box-shadow: var(--shadow-md);
+}
+
+.obsidian-preview pre code {
+  color: #e5e7eb;
+  font-size: 0.875rem;
+  line-height: 1.6;
+  display: block;
+}
+
+/* Custom horizontal rule divider */
+.obsidian-preview hr {
+  border: 0;
+  height: 1px;
+  background: linear-gradient(to right, transparent, var(--border-medium), transparent);
+  margin: 2rem 0;
+}
+
+/* Editor Input Sync Highlighting Indicator */
+.editor-sync-highlight {
+  outline: 2px solid var(--accent);
+  outline-offset: -2px;
+}
+
+/* Sidebar slide interactive class */
+.sidebar-closed {
+  transform: translateX(-100%);
+}
+
+@media (min-width: 1024px) {
+  .sidebar-closed {
+    transform: none;
+    width: 0 !important;
+    min-width: 0 !important;
+    opacity: 0;
+    pointer-events: none;
+  }
+}
+
+/* Utility to ensure fluid responsiveness on text editors */
+textarea {
+  resize: none;
+  outline: none;
+}
+
+textarea:focus {
+  box-shadow: inset 0 0 0 1px var(--border-focus);
+}
+
+/* Premium micro-interactions for file-card list elements */
+.file-card {
+  border: 1px solid transparent;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.file-card:hover {
+  background-color: var(--bg-panel);
+  border-color: var(--border-dim);
+}
+
+.file-card.active {
+  background-color: var(--bg-editor);
+  border-color: var(--accent);
+  box-shadow: 0 0 12px var(--accent-glow-subtle);
+}
+
+.file-card.active::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 10%;
+  height: 80%;
+  width: 3px;
+  background-color: var(--accent);
+  border-radius: 0 4px 4px 0;
+}
