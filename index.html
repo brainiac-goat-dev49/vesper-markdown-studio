@@ -32,7 +32,7 @@
 <body class="bg-[#0b0f17] text-zinc-100 flex h-screen w-screen overflow-hidden">
 
   <!-- COLLAPSIBLE SIDEBAR NOTE LIST -->
-  <aside id="sidebar" class="w-80 h-full bg-[#111827] border-r border-zinc-800/80 flex flex-col shrink-0 transition-all duration-300 z-30 md:relative absolute inset-y-0 left-0 md:translate-x-0">
+  <aside id="sidebar" class="w-80 h-full bg-[#111827] border-r border-zinc-800/80 flex flex-col shrink-0 transition-all duration-300 z-30 lg:relative absolute inset-y-0 left-0 lg:translate-x-0">
     <!-- Sidebar Header -->
     <div class="p-4 border-b border-zinc-800/80 flex items-center justify-between">
       <div class="flex items-center gap-2.5">
@@ -48,7 +48,7 @@
       </div>
       
       <!-- Mobile Close Trigger -->
-      <button id="sidebarCloseBtn" class="md:hidden text-zinc-400 hover:text-white p-1 rounded hover:bg-zinc-800 smooth-transition">
+      <button id="sidebarCloseBtn" class="lg:hidden text-zinc-400 hover:text-white p-1 rounded hover:bg-zinc-800 smooth-transition">
         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
         </svg>
@@ -165,6 +165,19 @@
       <input id="noteTagsInput" type="text" placeholder="work, coding, architecture (comma separated)" class="bg-transparent border-none text-xs text-violet-300 placeholder-zinc-600 focus:outline-none flex-1 min-w-[200px]" disabled>
     </div>
 
+    <!-- Responsive Technology Context Wrapper Panel -->
+    <div id="techContextPanel" class="px-4 py-2 bg-[#111622] border-b border-zinc-800/50 flex flex-wrap items-center gap-2 shrink-0 hidden">
+      <span class="text-[10px] text-zinc-500 uppercase font-mono tracking-widest font-semibold flex items-center gap-1 mr-1">
+        <svg class="w-3 h-3 text-emerald-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+        </svg>
+        Detected Tech Stack:
+      </span>
+      <div id="techStackBadges" class="flex flex-wrap gap-1.5">
+        <!-- Dynamic framework / technology badges injected here -->
+      </div>
+    </div>
+
     <!-- Responsive layout mobile view toggles -->
     <div class="lg:hidden flex border-b border-zinc-800">
       <button id="tabEdit" class="flex-1 py-3 text-center text-xs font-bold bg-zinc-800 text-white border-r border-zinc-800 flex items-center justify-center gap-2">
@@ -244,7 +257,7 @@
           </div>
           <h2 class="font-bold text-sm text-white tracking-wide">Obsidian Markdown Cheat-Sheet Reference</h2>
         </div>
-        <button id="closeCheatSheet" class="text-zinc-400 hover:text-white p-1.5 rounded-lg hover:bg-zinc-800 smooth-transition">
+        <button class="close-cheatsheet-btn text-zinc-400 hover:text-white p-1.5 rounded-lg hover:bg-zinc-800 smooth-transition">
           <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
           </svg>
@@ -367,7 +380,7 @@
 
       <!-- Modal Footer -->
       <div class="px-6 py-4 bg-[#0d121c] border-t border-zinc-800 flex justify-end">
-        <button id="closeCheatSheet" class="bg-violet-600 hover:bg-violet-700 text-white font-bold text-xs py-2 px-4 rounded-lg smooth-transition">
+        <button class="close-cheatsheet-btn bg-violet-600 hover:bg-violet-700 text-white font-bold text-xs py-2 px-4 rounded-lg smooth-transition">
           Understood, Close
         </button>
       </div>
