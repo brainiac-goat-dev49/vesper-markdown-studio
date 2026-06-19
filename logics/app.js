@@ -1,230 +1,229 @@
-// Predefined Notes list for instant onboarding
-const DEFAULT_NOTES = [
+// Obsidian Lite Workspace Core Application Engine
+
+// Initial Sample Notes
+const INITIAL_NOTES = [
   {
-    id: 'note-1',
-    title: '🚀 Workspace Onboarding Guide',
-    content: `# Welcome to Obsidian Lite\n\nObsidian Lite is a high-performance markdown writing and documentation hub.\n\n## 🌟 Premium Features\n- **Real-time Live Preview** compiles Markdown into HTML on-the-fly.\n- **Tech Stack Analysis**: Automatically identifies frameworks and libraries referenced in your code (e.g., React, TypeScript, Vue).\n- **Interactive Checklists**: Click on the live preview checkboxes to change document state!\n- **Table Formatting**: Creates high-fidelity responsive tables.\n\n---\n\n## 🛠️ Code Blocks with Premium Headers\n\`\`\`typescript\nimport React from 'react';\n\nexport function CoreWorkspace() {\n  const [active, setActive] = React.useState(true);\n  return (\n    <div className="p-4 bg-zinc-900 rounded-lg">\n      <p>Active developer sandbox context is running!</p>\n    </div>\n  );\n}\n\`\`\`\n\n## 📊 Table Layout Improvement Example\n| Technical Stack | Maturity Rating | Target Execution |\n| :--- | :---: | :--- |\n| React & Next.js | Enterprise | Production Live |\n| Tailwind CSS | High | Styled Interface |\n| SQLite / PostgreSQL | Solid | Multi-tenant Database |\n\n## 💡 Rich Blockquote Styling\n> "Simplicity is the ultimate sophistication. When you write standard documentation, make it expressive, responsive, and robust."\n> — Obsidian Lite Workspace\n\n## 📝 Simple Checklist Target\n- [x] Integrate high-precision markdown processor\n- [ ] Build beautiful code blocks with language indicators\n- [ ] Finish system layout alignments\n\n*Create a new document to start drafting custom notes!*`,
-    tags: 'onboarding, markdown, react',
+    id: "1",
+    title: "✨ Welcome to Obsidian Lite",
+    content: `# Welcome to Obsidian Lite! 🪐\n\nObsidian Lite is a fast, responsive Markdown-powered editor with real-time live preview compiling, tag categorization, and **intelligent codeblock language scanning**.\n\n## 💻 Tech Language Detection\nWhen you insert code blocks, the editor automatically inspects the code block context and contents to identify the language:\n\n```\nimport React, { useState } from 'react';\nfunction Counter() {\n  const [count, setCount] = useState(0);\n  return <button onClick={() => setCount(count + 1)}>{count}</button>;\n}\n```\n\nHere's another CSS code block example:\n```\nbody {\n  background-color: #0b0f17;\n  color: #ffffff;\n  display: flex;\n}\n```\n\nAnd a Python example:\n```\ndef find_prime_numbers(limit):\n    primes = []\n    for num in range(2, limit):\n        if all(num % i != 0 for i in range(2, int(num**0.5) + 1)):\n            primes.append(num)\n    return primes\n```\n\n## active Document Features\n- **Dynamic Checklists**: Click on the items directly in the Live Preview!\n  - [x] Create a premium modern design interface\n  - [ ] Write some beautiful markdown code\n  - [ ] Filter documents by Metadata tags below\n- **Keyboard shortcuts**: Use ::Ctrl + S:: or ::Cmd + S:: to trigger quick-save validation.\n- **Custom Highlights**: Style paragraphs with ==gorgeous custom highlighting background highlights== for emphasis.\n\nEnjoy your minimalist developer workspace!`,
+    tags: "welcome, markdown, demo",
     updatedAt: Date.now()
   },
   {
-    id: 'note-2',
-    title: '🗺️ Project Roadmap Spec',
-    content: `# Project Spec Draft\n\nThis is a draft for our next-gen micro-frontend platform. We're considering leveraging several modern tools.\n\n## ⚡ Framework Stack Under Review\n- Svelte / SvelteKit for lighter weight runtimes\n- Vue 3 with Vite\n- Rust for the underlying WASM module compilation\n\n---\n\n> Key Quote: "Performance must be measured in milliseconds on weak 3G networks." - Core Architect\n`,
-    tags: 'roadmap, vue, svelte, rust',
+    id: "2",
+    title: "data Project Blueprints & Specs",
+    content: `# Project Specs Draft\n\nHere is a quick spec outline for our upcoming web application design.\n\n### Recommended System Stack:\n- Frontend: React / Tailwind CSS\n- Database: Supabase / PostgreSQL\n- Runtime: Node.js / Bun\n\n### Table of Deliverables:\n| Feature | Priority | Estimated Time |\n|---|---|---|\n| User Authentication | High | 3 days |\n| Real-time Collab | Medium | 5 days |\n| Markdown Export | High | 1 day |\n\n> "Simplicity is the ultimate sophistication." — Leonardo da Vinci`,
+    tags: "work, planning",
     updatedAt: Date.now() - 3600000
   }
 ];
 
-const FRAMEWORKS_MAP = {
-  'react': { name: 'React', color: 'bg-cyan-500/10 text-cyan-400 border-cyan-500/30' },
-  'vue': { name: 'Vue.js', color: 'bg-emerald-500/10 text-emerald-400 border-emerald-500/30' },
-  'angular': { name: 'Angular', color: 'bg-red-500/10 text-red-400 border-red-500/30' },
-  'svelte': { name: 'Svelte', color: 'bg-orange-500/10 text-orange-400 border-orange-500/30' },
-  'typescript': { name: 'TypeScript', color: 'bg-blue-500/10 text-blue-400 border-blue-500/30' },
-  'javascript': { name: 'JavaScript', color: 'bg-yellow-500/10 text-yellow-400 border-yellow-500/30' },
-  'node': { name: 'Node.js', color: 'bg-green-500/10 text-green-400 border-green-500/30' },
-  'tailwind': { name: 'Tailwind CSS', color: 'bg-sky-500/10 text-sky-400 border-sky-500/30' },
-  'rust': { name: 'Rust', color: 'bg-amber-600/10 text-amber-400 border-amber-600/30' },
-  'python': { name: 'Python', color: 'bg-indigo-500/10 text-indigo-400 border-indigo-500/30' },
-  'nextjs': { name: 'Next.js', color: 'bg-zinc-100/10 text-zinc-100 border-zinc-100/30' },
-  'laravel': { name: 'Laravel', color: 'bg-rose-500/10 text-rose-400 border-rose-500/30' },
-  'django': { name: 'Django', color: 'bg-emerald-600/10 text-emerald-300 border-emerald-600/30' },
-  'postgres': { name: 'PostgreSQL', color: 'bg-blue-600/10 text-blue-300 border-blue-600/30' },
-  'sqlite': { name: 'SQLite', color: 'bg-sky-600/10 text-sky-300 border-sky-600/30' }
+// Document Templates
+const TEMPLATES = {
+  daily: `# daily Strategy Log - ${new Date().toLocaleDateString()}\n\n## Focus Objectives for Today\n- [ ] 1. \n- [ ] 2. \n- [ ] 3. \n\n## Daily Reflection\n> Write about successes, blockers, and progress...\n\n## Quick Notes\n- `,
+  weekly: `# weekly Blueprints & Action Plans\n\n## Executive Summary\n*What is the overall goal of the week?*\n\n## Milestones\n- [ ] Milestone Alpha (Design)\n- [ ] Milestone Beta (Prototype)\n- [ ] Milestone Gamma (Test)\n\n## Team Review Tracker\n- Frontend Development: Done\n- Testing Validation: In progress`,
+  project: `# project Specs Draft\n\n## 1. Objectives & Background\nDefine the ultimate target...\n\n## 2. Technical Stack Requirement\n```\nconst CONFIG = {\n  port: 8080,\n  database: 'postgresql://db.local',\n  features: ['auth', 'indexing', 'cache']\n};\n```\n\n## 3. Launch Checklist\n- [ ] Setup production server environment\n- [ ] Secure SSL certificates\n- [ ] Connect custom domains`,
+  meeting: `# meeting Schedule Agenda\n\n**Date:** ${new Date().toLocaleDateString()}\n**Attendees:** \n\n## Agenda\n1. Product review discussion\n2. Engineering sprint plan\n3. Feature launch sync\n\n## Action Items\n- [ ] Team: finalize sprint backlog\n- [ ] Engineering: merge active build branches`
 };
 
-let notes = [];
-let activeNoteId = null;
-let selectedTagFilter = null;
-let activeSearchQuery = '';
+// Application State
+let notes = JSON.parse(localStorage.getItem('obsidian_lite_notes')) || INITIAL_NOTES;
+let activeNoteId = localStorage.getItem('obsidian_lite_active_id') || "1";
 
-const noteListContainer = document.getElementById('noteList');
+// DOM References
+const sidebar = document.getElementById('sidebar');
+const sidebarToggleBtn = document.getElementById('sidebarToggleBtn');
+const sidebarCloseBtn = document.getElementById('sidebarCloseBtn');
+const noteList = document.getElementById('noteList');
 const tagsFilterList = document.getElementById('tagsFilterList');
-const searchInput = document.getElementById('searchInput');
 const createNoteBtn = document.getElementById('createNoteBtn');
+const searchInput = document.getElementById('searchInput');
+
 const noteTitleInput = document.getElementById('noteTitleInput');
 const noteTagsInput = document.getElementById('noteTagsInput');
+const templateSelect = document.getElementById('templateSelect');
+const deleteNoteBtn = document.getElementById('deleteNoteBtn');
+const saveIndicator = document.getElementById('saveIndicator');
+
+const editorPane = document.getElementById('editorPane');
 const editorInput = document.getElementById('editorInput');
 const previewPane = document.getElementById('previewPane');
-const deleteNoteBtn = document.getElementById('deleteNoteBtn');
-const templateSelect = document.getElementById('templateSelect');
-const saveIndicator = document.getElementById('saveIndicator');
-const techContextPanel = document.getElementById('techContextPanel');
-const techStackBadges = document.getElementById('techStackBadges');
-
-const statsWords = document.getElementById('statsWords');
-const statsChars = document.getElementById('statsChars');
-const statsReadTime = document.getElementById('statsReadTime');
+const previewPaneContainer = document.getElementById('previewPaneContainer');
 
 const tabEdit = document.getElementById('tabEdit');
 const tabPreview = document.getElementById('tabPreview');
-const editorPane = document.getElementById('editorPane');
-const previewPaneContainer = document.getElementById('previewPaneContainer');
-
-const sidebarToggleBtn = document.getElementById('sidebarToggleBtn');
-const sidebarCloseBtn = document.getElementById('sidebarCloseBtn');
-const sidebar = document.getElementById('sidebar');
 
 const cheatSheetToggle = document.getElementById('cheatSheetToggle');
 const cheatSheetModal = document.getElementById('cheatSheetModal');
 const closeCheatsheetBtns = document.querySelectorAll('.close-cheatsheet-btn');
 
-function initApp() {
-  const saved = localStorage.getItem('obsidian_lite_notes');
-  if (saved) {
-    try {
-      notes = JSON.parse(saved);
-    } catch(e) {
-      notes = [...DEFAULT_NOTES];
-    }
-  } else {
-    notes = [...DEFAULT_NOTES];
-  }
+const statsWords = document.getElementById('statsWords');
+const statsChars = document.getElementById('statsChars');
+const statsReadTime = document.getElementById('statsReadTime');
 
-  const lastActiveId = localStorage.getItem('obsidian_lite_active_id');
-  if (lastActiveId && notes.find(n => n.id === lastActiveId)) {
-    activeNoteId = lastActiveId;
-  } else if (notes.length > 0) {
-    activeNoteId = notes[0].id;
-  }
+// Filter states
+let selectedTag = null;
+let searchQuery = "";
 
-  setupEventListeners();
-  renderSidebar();
+// Initialize App
+function init() {
+  renderSidebarNotes();
+  renderTagsFilter();
   loadActiveNote();
+  setupEventListeners();
 }
 
-function renderSidebar() {
-  let filtered = [...notes];
-  if (activeSearchQuery.trim()) {
-    const q = activeSearchQuery.toLowerCase().trim();
-    filtered = filtered.filter(n => 
-      n.title.toLowerCase().includes(q) || 
-      n.content.toLowerCase().includes(q) || 
-      n.tags.toLowerCase().includes(q)
-    );
-  }
+// Render the sidebar items list
+function renderSidebarNotes() {
+  noteList.innerHTML = "";
+  
+  const filteredNotes = notes.filter(note => {
+    const matchesSearch = note.title.toLowerCase().includes(searchQuery.toLowerCase()) || 
+                          note.content.toLowerCase().includes(searchQuery.toLowerCase()) ||
+                          note.tags.toLowerCase().includes(searchQuery.toLowerCase());
+    
+    if (!selectedTag) return matchesSearch;
+    const noteTagsList = note.tags.split(',').map(t => t.trim().toLowerCase());
+    return matchesSearch && noteTagsList.includes(selectedTag.toLowerCase());
+  });
 
-  if (selectedTagFilter) {
-    filtered = filtered.filter(n => {
-      const list = n.tags.split(',').map(t => t.trim().toLowerCase());
-      return list.includes(selectedTagFilter.toLowerCase());
-    });
-  }
-
-  filtered.sort((a, b) => b.updatedAt - a.updatedAt);
-
-  noteListContainer.innerHTML = '';
-  if (filtered.length === 0) {
-    noteListContainer.innerHTML = `
-      <div class="p-4 text-center text-xs text-zinc-500">
-        No documents found.
+  if (filteredNotes.length === 0) {
+    noteList.innerHTML = `
+      <div class="text-center py-6 px-4">
+        <p class="text-xs text-zinc-500 font-medium">No documents match the active filter or search query.</p>
       </div>
     `;
-  } else {
-    filtered.forEach(note => {
-      const isActive = note.id === activeNoteId;
-      const card = document.createElement('button');
-      card.className = `w-full text-left p-3 rounded-lg smooth-transition border flex flex-col gap-1.5 ${
-        isActive 
-          ? 'bg-violet-950/20 border-violet-500/50 shadow-sm shadow-violet-950/10' 
-          : 'bg-zinc-900/40 border-zinc-800/40 hover:bg-zinc-800/40 hover:border-zinc-700/60'
-      }`;
-
-      let previewText = note.content.replace(/[#*`>_~|[-]/g, '').substring(0, 70);
-      if (note.content.length > 70) previewText += '...';
-
-      const tagBadges = note.tags.split(',')
-        .map(t => t.trim())
-        .filter(t => t.length > 0)
-        .map(t => `<span class="bg-zinc-800 text-[9px] text-zinc-400 px-1.5 py-0.5 rounded">${t}</span>`)
-        .join(' ');
-
-      card.innerHTML = `
-        <div class="flex items-center justify-between gap-2 w-full">
-          <span class="font-bold text-xs ${isActive ? 'text-violet-300' : 'text-zinc-200'} truncate">${note.title || 'Untitled note'}</span>
-          <span class="text-[9px] text-zinc-500 font-mono shrink-0">${formatTime(note.updatedAt)}</span>
-        </div>
-        <p class="text-[11px] text-zinc-400/80 line-clamp-2 leading-relaxed">${previewText || 'Empty workspace...'}</p>
-        ${tagBadges ? `<div class="flex flex-wrap gap-1 mt-1">${tagBadges}</div>` : ''}
-      `;
-
-      card.addEventListener('click', () => {
-        selectNote(note.id);
-        if (window.innerWidth < 1024) {
-          sidebar.classList.add('-translate-x-full');
-        }
-      });
-      noteListContainer.appendChild(card);
-    });
+    return;
   }
 
+  const sortedNotes = [...filteredNotes].sort((a, b) => b.updatedAt - a.updatedAt);
+
+  sortedNotes.forEach(note => {
+    const isActive = note.id === activeNoteId;
+    const item = document.createElement('div');
+    item.className = `p-3 rounded-lg cursor-pointer transition-all duration-200 group relative border ${
+      isActive 
+        ? 'bg-violet-600/10 border-violet-500/50 shadow-sm shadow-violet-500/5 text-white' 
+        : 'bg-zinc-900/40 border-transparent hover:bg-zinc-800/40 hover:border-zinc-800 text-zinc-300'
+    }`;
+    
+    const tagsArray = note.tags.split(',').map(t => t.trim()).filter(Boolean);
+    const tagsBadges = tagsArray.map(t => `
+      <span class="text-[9px] px-1.5 py-0.5 rounded bg-zinc-800 text-zinc-400 border border-zinc-700/50">${t}</span>
+    `).join('');
+
+    const plainSummary = note.content
+      .replace(/[#*`~_]/g, '')
+      .substring(0, 60) + (note.content.length > 60 ? '...' : '');
+
+    item.innerHTML = `
+      <div class="flex items-start justify-between gap-2">
+        <h3 class="text-xs font-bold truncate flex-1 ${isActive ? 'text-violet-300' : 'text-zinc-200 group-hover:text-white'}">
+          ${note.title || 'Untitled note'}
+        </h3>
+        <span class="text-[9px] text-zinc-500 shrink-0 font-mono">
+          ${formatTime(note.updatedAt)}
+        </span>
+      </div>
+      <p class="text-[11px] text-zinc-500 mt-1 line-clamp-1 font-normal">
+        ${plainSummary || 'Empty document body'}
+      </p>
+      ${tagsBadges ? `<div class="flex flex-wrap gap-1 mt-2">${tagsBadges}</div>` : ''}
+    `;
+
+    item.addEventListener('click', () => {
+      selectNote(note.id);
+      if (window.innerWidth < 1024) {
+        sidebar.classList.add('-translate-x-full');
+      }
+    });
+
+    noteList.appendChild(item);
+  });
+}
+
+function formatTime(timestamp) {
+  const diff = Date.now() - timestamp;
+  if (diff < 60000) return 'Just now';
+  const mins = Math.floor(diff / 60000);
+  if (mins < 60) return `${mins}m ago`;
+  const hrs = Math.floor(mins / 60);
+  if (hrs < 24) return `${hrs}h ago`;
+  return new Date(timestamp).toLocaleDateString(undefined, { month: 'short', day: 'numeric' });
+}
+
+function renderTagsFilter() { 
   const allTags = new Set();
   notes.forEach(note => {
-    note.tags.split(',').forEach(tag => {
-      const clean = tag.trim();
-      if (clean) allTags.add(clean.toLowerCase());
+    note.tags.split(',').forEach(t => {
+      const cleaned = t.trim();
+      if (cleaned) allTags.add(cleaned.toLowerCase());
     });
   });
 
-  tagsFilterList.innerHTML = '';
-  const allBtn = document.createElement('button');
-  allBtn.className = `px-2 py-1 text-[10px] rounded font-medium smooth-transition text-left flex items-center justify-between ${
-    !selectedTagFilter ? 'bg-violet-500/15 text-violet-300 border border-violet-500/20' : 'text-zinc-400 hover:text-zinc-200'
+  tagsFilterList.innerHTML = "";
+  
+  const allItem = document.createElement('button');
+  allItem.className = `w-full text-left text-xs py-1.5 px-2 rounded-md font-medium flex items-center justify-between transition-all ${
+    !selectedTag 
+      ? 'bg-zinc-800 text-violet-400 font-bold' 
+      : 'text-zinc-400 hover:text-zinc-200 hover:bg-zinc-800/40'
   }`;
-  allBtn.innerHTML = `<span>⚡ Clear filters</span> <span class="text-[9px] opacity-60 font-mono">(\${notes.length})</span>`;
-  allBtn.addEventListener('click', () => {
-    selectedTagFilter = null;
-    renderSidebar();
+  allItem.innerHTML = `
+    <span class="flex items-center gap-1.5">
+      <span class="w-1.5 h-1.5 rounded-full ${!selectedTag ? 'bg-violet-400' : 'bg-zinc-600'}"></span>
+      All Documents
+    </span>
+    <span class="text-[10px] text-zinc-500 font-mono">${notes.length}</span>
+  `;
+  allItem.addEventListener('click', () => {
+    selectedTag = null;
+    renderTagsFilter();
+    renderSidebarNotes();
   });
-  tagsFilterList.appendChild(allBtn);
+  tagsFilterList.appendChild(allItem);
 
   allTags.forEach(tag => {
-    const count = notes.filter(n => n.tags.split(',').map(t => t.trim().toLowerCase()).includes(tag)).length;
+    const count = notes.filter(n => n.tags.toLowerCase().includes(tag)).length;
+    const isSelected = selectedTag === tag;
     const tagBtn = document.createElement('button');
-    tagBtn.className = `px-2 py-1 text-[10px] rounded font-medium smooth-transition text-left flex items-center justify-between ${
-      selectedTagFilter === tag ? 'bg-violet-500/20 text-violet-300 border border-violet-500/30' : 'text-zinc-400 hover:text-zinc-200'
+    tagBtn.className = `w-full text-left text-xs py-1.5 px-2 rounded-md font-medium flex items-center justify-between transition-all ${
+      isSelected 
+        ? 'bg-violet-600/20 text-violet-300 font-bold border-l-2 border-violet-500' 
+        : 'text-zinc-400 hover:text-zinc-200 hover:bg-zinc-800/40'
     }`;
-    tagBtn.innerHTML = `<span># \${tag}</span> <span class="text-[9px] opacity-60 font-mono">(\${count})</span>`;
+    tagBtn.innerHTML = `
+      <span class="flex items-center gap-1.5 truncate">
+        <span class="text-violet-500 font-semibold font-mono">#</span>
+        <span class="truncate">${tag}</span>
+      </span>
+      <span class="text-[10px] text-zinc-500 font-mono">${count}</span>
+    `;
     tagBtn.addEventListener('click', () => {
-      selectedTagFilter = tag;
-      renderSidebar();
+      selectedTag = isSelected ? null : tag;
+      renderTagsFilter();
+      renderSidebarNotes();
     });
     tagsFilterList.appendChild(tagBtn);
   });
 }
 
-function formatTime(ms) {
-  const diff = Date.now() - ms;
-  if (diff < 60000) return 'Just now';
-  const mins = Math.floor(diff / 60000);
-  if (mins < 60) return `\${mins}m ago`;
-  const hrs = Math.floor(mins / 60);
-  if (hrs < 24) return `\${hrs}h ago`;
-  return new Date(ms).toLocaleDateString(undefined, { month: 'short', day: 'numeric' });
+function selectNote(id) {
+  activeNoteId = id;
+  localStorage.setItem('obsidian_lite_active_id', id);
+  loadActiveNote();
+  renderSidebarNotes();
 }
 
 function loadActiveNote() {
   const note = notes.find(n => n.id === activeNoteId);
   if (!note) {
-    noteTitleInput.value = '';
-    noteTitleInput.disabled = true;
-    noteTagsInput.value = '';
-    noteTagsInput.disabled = true;
-    editorInput.value = '';
-    editorInput.disabled = true;
-    deleteNoteBtn.disabled = true;
-    previewPane.innerHTML = `
-      <div class="h-full flex flex-col items-center justify-center text-center p-6">
-        <svg class="w-12 h-12 text-zinc-600 mb-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
-        </svg>
-        <h4 class="text-zinc-400 font-bold text-sm">No Active Document Selected</h4>
-        <p class="text-xs text-zinc-500 mt-1 max-w-xs">Create a new markdown note or clear search filters to load a document workspace.</p>
-      </div>
-    `;
-    updateStats('', '');
-    techContextPanel.classList.add('hidden');
+    if (notes.length > 0) {
+      activeNoteId = notes[0].id;
+      loadActiveNote();
+    } else {
+      disableWorkspace();
+    }
     return;
   }
 
@@ -237,436 +236,1173 @@ function loadActiveNote() {
   noteTagsInput.value = note.tags;
   editorInput.value = note.content;
 
-  triggerRender();
+  updatePreview();
+  updateStats();
+  showSavedStatus();
 }
 
-function selectNote(id) {
-  activeNoteId = id;
-  localStorage.setItem('obsidian_lite_active_id', id);
-  renderSidebar();
-  loadActiveNote();
-}
-
-function triggerRender() {
-  const title = noteTitleInput.value;
-  const markdownText = editorInput.value;
-
-  const compiledHtml = parseMarkdown(markdownText);
-  previewPane.innerHTML = compiledHtml;
-
-  updateStats(title, markdownText);
-
-  const detectedFrameworks = analyzeTechStack(markdownText);
-  if (detectedFrameworks.length > 0) {
-    techContextPanel.classList.remove('hidden');
-    techStackBadges.innerHTML = detectedFrameworks.map(fw => `
-      <span class="inline-flex items-center gap-1 text-[10px] font-bold px-2 py-0.5 rounded border \${fw.color}">
-        \${fw.name}
-      </span>
-    `).join('');
-  } else {
-    techContextPanel.classList.add('hidden');
-  }
-
-  flashSavedStatus();
-}
-
-function saveCurrentNote() {
-  const noteIndex = notes.findIndex(n => n.id === activeNoteId);
-  if (noteIndex !== -1) {
-    notes[noteIndex].title = noteTitleInput.value || 'Untitled note';
-    notes[noteIndex].tags = noteTagsInput.value;
-    notes[noteIndex].content = editorInput.value;
-    notes[noteIndex].updatedAt = Date.now();
-
-    localStorage.setItem('obsidian_lite_notes', JSON.stringify(notes));
-  }
-}
-
-let saveTimeout = null;
-function flashSavedStatus() {
-  saveIndicator.innerHTML = `
-    <span class="inline-block w-2.5 h-2.5 rounded-full bg-amber-500 mr-2 saving-pulse"></span>
-    <span class="text-xs text-zinc-300 font-semibold tracking-wide uppercase">Saving...</span>
-  `;
-
-  if (saveTimeout) clearTimeout(saveTimeout);
-  saveTimeout = setTimeout(() => {
-    saveCurrentNote();
-    renderSidebar();
-    saveIndicator.innerHTML = `
-      <span class="inline-block w-2.5 h-2.5 rounded-full bg-emerald-500 mr-2"></span>
-      <span class="text-xs text-zinc-300 font-semibold tracking-wide uppercase">Sync Saved</span>
-    `;
-  }, 400); 
-}
-
-function parseMarkdown(text) {
-  const lines = text.split('\n');
-  let html = [];
+function disableWorkspace() {
+  noteTitleInput.value = "";
+  noteTitleInput.disabled = true;
+  noteTagsInput.value = "";
+  noteTagsInput.disabled = true;
+  editorInput.value = "Create or select a note from the sidebar to get started!";
+  editorInput.disabled = true;
+  deleteNoteBtn.disabled = true;
   
-  let i = 0;
-  while (i < lines.length) {
-    let line = lines[i];
-
-    if (line.trim().startsWith('```')) {
-      let lang = line.trim().substring(3).trim() || 'txt';
-      let codeLines = [];
-      i++;
-      while (i < lines.length && !lines[i].trim().startsWith('```')) {
-        codeLines.push(lines[i]);
-        i++;
-      }
-      let codeContent = codeLines.join('\n');
-      
-      let escapedCode = codeContent
-        .replace(/&/g, '&amp;')
-        .replace(/</g, '&lt;')
-        .replace(/>/g, '&gt;');
-
-      let blockId = `code-\${Math.random().toString(36).substr(2, 9)}`;
-      html.push(`
-        <div class="codeblock-container my-4">
-          <div class="codeblock-header">
-            <span class="codeblock-lang-badge">\${lang}</span>
-            <button class="copy-code-btn" onclick="copyCodeText(\'\${blockId}\')">
-              <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3" />
-              </svg>
-              Copy
-            </button>
-          </div>
-          <pre><code id="\${blockId}" class="language-\${lang}">\${escapedCode}</code></pre>
-        </div>
-      `);
-      i++;
-      continue;
-    }
-
-    if (line.trim().startsWith('|')) {
-      let tableLines = [];
-      while (i < lines.length && lines[i].trim().startsWith('|')) {
-        tableLines.push(lines[i]);
-        i++;
-      }
-      
-      if (tableLines.length > 0) {
-        let tableHtml = '<table class="w-full text-left border-collapse my-4">';
-        
-        let rows = tableLines.map(r => {
-          let cleaned = r.trim();
-          if (cleaned.startsWith('|')) cleaned = cleaned.substring(1);
-          if (cleaned.endsWith('|')) cleaned = cleaned.substring(0, cleaned.length - 1);
-          return cleaned.split('|').map(cell => cell.trim());
-        });
-
-        let hasSeparator = rows.length > 1 && rows[1].every(cell => cell.startsWith('-') || cell.endsWith('-') || cell.startsWith(':') || cell.endsWith(':'));
-        
-        let startRow = 0;
-        if (hasSeparator) {
-          tableHtml += '<thead><tr>';
-          rows[0].forEach(cell => {
-            tableHtml += `<th>\${inlineParse(cell)}</th>`;
-          });
-          tableHtml += '</tr></thead>';
-          startRow = 2;
-        } else {
-          startRow = 0;
-        }
-
-        tableHtml += '<tbody>';
-        for (let rIdx = startRow; rIdx < rows.length; rIdx++) {
-          tableHtml += '<tr>';
-          rows[rIdx].forEach(cell => {
-            tableHtml += `<td>\${inlineParse(cell)}</td>`;
-          });
-          tableHtml += '</tr>';
-        }
-        tableHtml += '</tbody></table>';
-        html.push(tableHtml); 
-      }
-      continue;
-    }
-
-    if (line.trim().startsWith('>')) {
-      let quoteLines = [];
-      while (i < lines.length && lines[i].trim().startsWith('>')) {
-        let cleanedQuoteLine = lines[i].trim();
-        if (cleanedQuoteLine.startsWith('> ')) {
-          cleanedQuoteLine = cleanedQuoteLine.substring(2);
-        } else {
-          cleanedQuoteLine = cleanedQuoteLine.substring(1);
-        }
-        quoteLines.push(cleanedQuoteLine);
-        i++;
-      }
-      
-      let parsedQuoteContent = quoteLines.map(line => inlineParse(line)).join('<br>');
-      html.push(`<blockquote><p>\${parsedQuoteContent}</p></blockquote>`);
-      continue;
-    }
-
-    if (line.trim().startsWith('#')) {
-      let trimmed = line.trim();
-      let level = 0;
-      while (trimmed[level] === '#') {
-        level++;
-      }
-      if (level > 0 && level <= 6 && trimmed[level] === ' ') {
-        let textVal = trimmed.substring(level + 1);
-        html.push(`<h\${level}>\${inlineParse(textVal)}</h\${level}>`);
-        i++;
-        continue;
-      }
-    }
-
-    if (line.trim() === '---' || line.trim() === '***' || line.trim() === '___') {
-      html.push('<hr>');
-      i++;
-      continue;
-    }
-
-    if (line.trim().startsWith('- ') || line.trim().startsWith('* ') || /^\d+\.\s/.test(line.trim())) {
-      let listLines = [];
-      while (i < lines.length && (lines[i].trim().startsWith('- ') || lines[i].trim().startsWith('* ') || /^\d+\.\s/.test(lines[i].trim()))) {
-        listLines.push({ rawIndex: i, text: lines[i] });
-        i++;
-      }
-
-      let listHtml = '';
-      let listType = listLines[0].text.trim().startsWith('-') || listLines[0].text.trim().startsWith('*') ? 'ul' : 'ol';
-      listHtml += `<\${listType}>`;
-
-      listLines.forEach(item => {
-        let raw = item.text.trim();
-        let content = '';
-        let isTask = false;
-        let isChecked = false;
-
-        if (raw.startsWith('- [ ] ') || raw.startsWith('- [x] ') || raw.startsWith('- [X] ')) { 
-          isTask = true;
-          isChecked = raw.toLowerCase().startsWith('- [x]');
-          content = raw.substring(6);
-        } else if (raw.startsWith('- ') || raw.startsWith('* ')) {
-          content = raw.substring(2);
-        } else {
-          let match = raw.match(/^\d+\.\s(.*)/);
-          content = match ? match[1] : raw;
-        }
-
-        if (isTask) {
-          listHtml += `
-            <li class="flex items-center gap-2 my-1">
-              <input type="checkbox" \${isChecked ? 'checked' : ''} data-raw-index="\${item.rawIndex}" class="task-checkbox accent-violet-500 cursor-pointer rounded bg-zinc-800 border-zinc-700">
-              <span class="\${isChecked ? 'line-through text-zinc-500' : ''}">\${inlineParse(content)}</span>
-            </li>`;
-        } else { 
-          listHtml += `<li>\${inlineParse(content)}</li>`;
-        }
-      });
-
-      listHtml += `</\${listType}>`;
-      html.push(listHtml);
-      continue;
-    }
-
-    if (line.trim() === '') {
-      i++;
-      continue;
-    }
-
-    html.push(`<p>\${inlineParse(line)}</p>`);
-    i++;
-  } 
-
-  return html.join('\n');
+  previewPane.innerHTML = `
+    <div class="h-full flex flex-col items-center justify-center text-center p-8">
+      <div class="w-16 h-16 rounded-full bg-zinc-800/50 border border-zinc-700/60 flex items-center justify-center mb-4">
+        <svg class="w-8 h-8 text-zinc-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
+        </svg>
+      </div>
+      <h3 class="text-sm font-bold text-zinc-300">No active document</h3>
+      <p class="text-xs text-zinc-500 mt-2 max-w-sm">Create a new document to start drafting Markdown or testing code blocks with real-time automatic detection.</p>
+    </div>
+  `;
+  
+  statsWords.textContent = "0";
+  statsChars.textContent = "0";
+  statsReadTime.textContent = "0m";
 }
 
-function inlineParse(str) {
-  let res = str
+function classifyCodeLanguage(content) {
+  const code = content.trim();
+  
+  if (code.includes('margin:') || code.includes('padding:') || code.includes('@import') || code.includes('display: flex') || code.includes('@media')) {
+    return 'CSS / STYLES';
+  }
+  
+  if (code.includes('<!DOCTYPE') || code.includes('<html') || code.includes('<div') || code.includes('class=') || code.includes('id=')) {
+    return 'HTML / XML';
+  }
+
+  if (code.includes('import ') && (code.includes('from \'') || code.includes('from "'))) {
+    return 'ES6 MODULE / JS / TS';
+  }
+  if (code.includes('const ') || code.includes('let ') || code.includes('function ') || code.includes('=>') || code.includes('console.log')) {
+    return 'JAVASCRIPT';
+  }
+
+  if (code.includes('def ') || code.includes('import os') || code.includes('print(') || code.includes(' elif ') || code.includes('__main__')) {
+    return 'PYTHON';
+  }
+
+  if (code.includes('public class ') || code.includes('System.out.println') || code.includes('public static void main')) {
+    return 'JAVA';
+  }
+
+  if (code.includes('SELECT ') || code.includes('INSERT INTO ') || code.includes('CREATE TABLE ')) {
+    return 'SQL DATABASE';
+  }
+
+  return 'RAW TEXT / GENERIC';
+}
+
+function updatePreview() {
+  const markdownText = editorInput.value || "";
+  const parsedHTML = compileMarkdown(markdownText);
+  previewPane.innerHTML = parsedHTML;
+
+  const checkBoxes = previewPane.querySelectorAll('input[type="checkbox"]');
+  checkBoxes.forEach((checkbox, idx) => {
+    checkbox.addEventListener('change', (e) => {
+      toggleChecklistStateInMarkdown(idx, e.target.checked);
+    });
+  });
+}
+
+function compileMarkdown(markdown) {
+  let html = markdown;
+
+  const codeBlockRegex = /```([\s\S]*?)```/g;
+  html = html.replace(codeBlockRegex, (match, codeContent) => {
+    const detectedLang = classifyCodeLanguage(codeContent);
+    
+    const escapedCode = codeContent
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .trim();
+
+    return `
+      <div class="code-block-wrapper my-4">
+        <div class="code-block-header">
+          <span>🖥️ DETECTED: <strong class="text-violet-400 font-bold">${detectedLang}</strong></span>
+          <button onclick="navigator.clipboard.writeText(\\\`${escapedCode.replace(/`/g, '\\\\`').replace(/\\$/g, '\\\\// Heuristic Language Scanner for Markdown Codeblocks
+function detectLanguage(code) {
+  const trimmed = code.trim();
+  if (trimmed.startsWith('{') && trimmed.endsWith('}') && trimmed.includes('"')) return 'json';
+  if (/<[a-z][\s\S]*>/i.test(trimmed) || trimmed.includes('<!DOCTYPE html>') || trimmed.includes('</div>')) return 'html';
+  if (/(const|let|var|function|console\.log|import\s|export\s|document\.)/g.test(trimmed)) return 'javascript';
+  if (/(def\s+[a-zA-Z_]|import\s+[a-zA-Z_]|print\s*\(|elif\s+|if\s+__name__)/g.test(trimmed)) return 'python';
+  if (/(SELECT\s+|FROM\s+|WHERE\s+|INSERT\s+INTO|UPDATE\s+|DELETE\s+FROM)/i.test(trimmed)) return 'sql';
+  if (/(margin:|padding:|color:|display:|background:|@media|@import)/.test(trimmed)) return 'css';
+  if (/(sudo\s+|npm\s+|git\s+|echo\s+|mkdir\s+)/.test(trimmed)) return 'shell';
+  return 'javascript'; // Default intelligent fallback
+}
+
+// Custom Markdown Parser with interactive elements and language scans
+function parseMarkdown(md) {
+  if (!md) return '<div class="text-zinc-500 italic py-8 text-center">Start writing to compile live output preview...</div>';
+
+  let html = md
     .replace(/&/g, '&amp;')
     .replace(/</g, '&lt;')
     .replace(/>/g, '&gt;');
 
-  res = res.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
-  res = res.replace(/__(.*?)__/g, '<strong>$1</strong>');
-  res = res.replace(/\*(.*?)\*/g, '<em>$1</em>');
-  res = res.replace(/_(.*?)_/g, '<em>$1</em>');
-  res = res.replace(/==(.*?)==/g, '<mark>$1</mark>');
-  res = res.replace(/~~(.*?)~~/g, '<del>$1</del>');
-  res = res.replace(/`(.*?)`/g, '<code>$1</code>');
-  res = res.replace(/::(.*?)::/g, '<kbd>$1</kbd>');
-
-  return res;
-}
-
-function analyzeTechStack(text) {
-  const normalized = text.toLowerCase();
-  const detected = [];
-  
-  Object.keys(FRAMEWORKS_MAP).forEach(key => {
-    const regex = new RegExp(`\\b\${key}\\b`, 'i');
-    if (regex.test(normalized)) {
-      detected.push(FRAMEWORKS_MAP[key]);
+  const codeBlocks = [];
+  html = html.replace(/```([\s\S]*?)```/gm, (match, content) => {
+    const lines = content.split('\n');
+    let lang = lines[0].trim();
+    let codeContent = '';
+    if (lang && /^[a-zA-Z0-9#+-]+$/.test(lang)) {
+      codeContent = lines.slice(1).join('\n');
+    } else {
+      lang = '';
+      codeContent = content;
     }
+    
+    // Auto detect language with real-time heuristic content scanner
+    const detected = detectLanguage(codeContent);
+    const finalLang = lang || detected || 'text';
+    
+    const placeholder = `__CODE_BLOCK_PLACEHOLDER_${codeBlocks.length}__`;
+    codeBlocks.push({
+      lang: finalLang,
+      content: codeContent.trim()
+    });
+    return placeholder;
   });
 
-  return detected;
+  const lines = html.split('\n');
+  let result = [];
+  let inList = false;
+  let listType = null; 
+  let inTable = false;
+  let tableHeaders = [];
+  let tableRows = [];
+
+  for (let i = 0; i < lines.length; i++) {
+    let line = lines[i];
+    const isTableRow = line.trim().startsWith('|') && line.trim().endsWith('|');
+
+    if (isTableRow) {
+      if (inList) {
+        result.push(`</${listType}>`);
+        inList = false;
+        listType = null;
+      }
+      
+      const cells = line.split('|').map(c => c.trim()).filter((c, idx, arr) => idx > 0 && idx < arr.length - 1);
+      
+      if (!inTable) {
+        inTable = true;
+        tableHeaders = cells;
+      } else {
+        const isSeparator = cells.every(c => /^:?-+:?$/.test(c));
+        if (!isSeparator) {
+          tableRows.push(cells);
+        }
+      }
+      continue;
+    } else {
+      if (inTable) {
+        let tableHtml = '<table><thead><tr>';
+        tableHeaders.forEach(h => {
+          tableHtml += `<th>${parseInlineMarkdown(h)}</th>`;
+        });
+        tableHtml += '</tr></thead><tbody>';
+        tableRows.forEach(row => {
+          tableHtml += '<tr>';
+          for (let j = 0; j < tableHeaders.length; j++) {
+            tableHtml += `<td>${parseInlineMarkdown(row[j] || '')}</td>`;
+          }
+          tableHtml += '</tr>';
+        });
+        tableHtml += '</tbody></table>';
+        result.push(tableHtml);
+        
+        inTable = false;
+        tableHeaders = [];
+        tableRows = [];
+      }
+    }
+
+    if (/^(?:-{3,}|\*{3,}|\_{3,})$/.test(line.trim())) {
+      if (inList) { result.push(`</${listType}>`); inList = false; listType = null; }
+      result.push('<hr>');
+      continue;
+    }
+
+    const headingMatch = line.match(/^(#{1,6})\s+(.*)$/);
+    if (headingMatch) {
+      if (inList) { result.push(`</${listType}>`); inList = false; listType = null; }
+      const level = headingMatch[1].length;
+      const content = parseInlineMarkdown(headingMatch[2]);
+      result.push(`<h${level}>${content}</h${level}>`);
+      continue;
+    }
+
+    const blockquoteMatch = line.match(/^&gt;\s?(.*)$/);
+    if (blockquoteMatch) {
+      if (inList) { result.push(`</${listType}>`); inList = false; listType = null; }
+      const content = parseInlineMarkdown(blockquoteMatch[1]);
+      result.push(`<blockquote><p>${content}</p></blockquote>`);
+      continue;
+    }
+
+    const taskMatch = line.match(/^[-*]\s+\[([ xX])\]\s+(.*)$/);
+    if (taskMatch) {
+      if (inList && listType !== 'ul') {
+        result.push(`</${listType}>`);
+        inList = false;
+      }
+      if (!inList) {
+        result.push('<ul class="task-list">');
+        inList = true;
+        listType = 'ul';
+      }
+      const checked = taskMatch[1].toLowerCase() === 'x';
+      const content = parseInlineMarkdown(taskMatch[2]);
+      result.push(`
+        <li class="task-list-item ${checked ? 'task-list-item-done' : ''}">
+          <input type="checkbox" data-line="${i}" ${checked ? 'checked' : ''} class="task-checkbox-interactive">
+          <span>${content}</span>
+        </li>
+      `);
+      continue;
+    }
+
+    const ulMatch = line.match(/^[-*]\s+(.*)$/);
+    if (ulMatch) {
+      if (inList && listType !== 'ul') {
+        result.push(`</${listType}>`);
+        inList = false;
+      }
+      if (!inList) {
+        result.push('<ul>');
+        inList = true;
+        listType = 'ul';
+      }
+      const content = parseInlineMarkdown(ulMatch[1]);
+      result.push(`<li>${content}</li>`);
+      continue;
+    }
+
+    const olMatch = line.match(/^(\d+)\.\s+(.*)$/);
+    if (olMatch) {
+      if (inList && listType !== 'ol') {
+        result.push(`</${listType}>`);
+        inList = false;
+      }
+      if (!inList) {
+        result.push('<ol>');
+        inList = true;
+        listType = 'ol';
+      }
+      const content = parseInlineMarkdown(olMatch[2]);
+      result.push(`<li>${content}</li>`);
+      continue;
+    }
+
+    if (line.trim() === '') {
+      if (inList) {
+        result.push(`</${listType}>`);
+        inList = false;
+        listType = null;
+      }
+      result.push('<br>');
+      continue;
+    }
+
+    if (inList) {
+      result.push(`</${listType}>`);
+      inList = false;
+      listType = null;
+    }
+    result.push(`<p>${parseInlineMarkdown(line)}</p>`);
+  }
+
+  if (inTable) {
+    let tableHtml = '<table><thead><tr>';
+    tableHeaders.forEach(h => { tableHtml += `<th>${parseInlineMarkdown(h)}</th>`; });
+    tableHtml += '</tr></thead><tbody>';
+    tableRows.forEach(row => {
+      tableHtml += '<tr>';
+      for (let j = 0; j < tableHeaders.length; j++) {
+        tableHtml += `<td>${parseInlineMarkdown(row[j] || '')}</td>`;
+      }
+      tableHtml += '</tr>';
+    });
+    tableHtml += '</tbody></table>';
+    result.push(tableHtml);
+  }
+  if (inList) {
+    result.push(`</${listType}>`);
+  }
+
+  let renderedHtml = result.join('\n');
+  codeBlocks.forEach((block, idx) => {
+    const placeholder = `__CODE_BLOCK_PLACEHOLDER_${idx}__`;
+    const escapedCode = block.content
+      .replace(/&amp;/g, '&')
+      .replace(/&lt;/g, '<')
+      .replace(/&gt;/g, '>');
+    
+    const customBlock = `
+      <div class="code-block-wrapper my-6 border border-zinc-800 rounded-lg overflow-hidden bg-[#090d16]">
+        <div class="codeblock-header flex items-center justify-between px-4 py-2 bg-[#111827] text-xs border-b border-zinc-800">
+          <span class="codeblock-lang-badge uppercase font-bold tracking-wider text-violet-400">${block.lang}</span>
+          <button class="copy-code-btn text-zinc-500 hover:text-zinc-200 flex items-center gap-1.5 transition-colors" data-code="${encodeURIComponent(escapCode)}">
+            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3" />
+            </svg>
+            <span>Copy</span>
+          </button>
+        </div>
+        <pre class="m-0 bg-[#090d16] p-4 overflow-x-auto"><code class="language-${block.lang} text-zinc-300 font-mono text-xs leading-relaxed">${escapeHTML(escapCode)}</code></pre>
+      </div>
+    `;
+    renderedHtml = renderedHtml.replace(placeholder, customBlock);
+  });
+
+  return renderedHtml;
 }
 
-function updateStats(title, content) {
-  const fullText = (title + ' ' + content).trim();
-  if (!fullText) {
-    statsWords.innerText = '0';
-    statsChars.innerText = '0';
-    statsReadTime.innerText = '1m';
+function parseInlineMarkdown(text) {
+  return text
+    .replace(/\*\*([\s\S]*?)\*\*/g, '<strong>$1</strong>')
+    .replace(/\*([\s\S]*?)\*/g, '<em>$1</em>')
+    .replace(/~~([\s\S]*?)~~/g, '<del>$1</del>')
+    .replace(/==([\s\S]*?)==/g, '<mark>$1</mark>')
+    .replace(/::([\s\S]*?)::/g, '<kbd>$1</kbd>')
+    .replace(/`([\s\S]*?)`/g, '<code>$1</code>');
+}
+
+function escapeHTML(str) {
+  return str.replace(/[&<>'"]/g, 
+    tag => ({
+      '&': '&amp;',
+      '<': '&lt;',
+      '>': '&gt;',
+      "'": '&#39;',
+      '"': '&quot;'
+    }[tag] || tag)
+  );
+}
+
+// Preloaded Default Documents
+const DEFAULT_NOTES = [
+  {
+    id: 'note-1',
+    title: 'Welcome to Obsidian Lite',
+    content: `# Welcome to Obsidian Lite 🪐
+This is a premium dark-themed Markdown workspace designed for high-fidelity technical editing, blueprints, and dynamic strategizing. 
+
+## Integrated Real-Time Scanning
+This application has **disabled the external global technology dashboard** in favor of high-performance **real-time heuristic code scanning** integrated directly into the markdown compiler. 
+
+Let's test the heuristic content language identification below:
+
+\`\`\`
+const workspace = {
+  version: 2026,
+  theme: "Obsidian Slate",
+  features: ["Markdown Live compiler", "Autosave", "Interactive checklist Sync"]
+};
+console.log("Workspace initialized successfully!");
+\`\`\`
+
+> Notice how the compiler automatically scanned the JavaScript signatures and labeled the code block badge as "JAVASCRIPT" without any manually specified language identifier!
+
+## Live Checklist Features
+- [x] Create some beautiful code blocks to test heuristic scanning
+- [ ] Try writing SQL queries or CSS styles and watch the compiler label them
+- [ ] Connect with standard markup cheatsheets
+
+Feel free to write tables, custom blockquotes, and explore the template injections above.`,
+    tags: 'welcome, onboarding, markdown',
+    updatedAt: Date.now()
+  },
+  {
+    id: 'note-2',
+    title: 'Architecture Blueprint v2026',
+    content: `# Architecture Blueprint v2026
+
+Below is a CSS codeblock. Notice how the heuristic compiler scans custom style selectors and styles them accurately under CSS labels:
+
+\`\`\`
+.obsidian-preview table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  margin: 2rem 0;
+}
+\`\`\`
+
+## Schema Models
+Below is a simple database model written in raw SQL. The real-time parser identifies standard statements automatically:
+
+\`\`\`
+SELECT account_id, username, email FROM system_accounts WHERE status = 'active';
+\`\`\``,
+    tags: 'architecture, blueprint, css',
+    updatedAt: Date.now() - 3600000
+  }
+];
+
+const TEMPLATES = {
+  daily: `# Daily Strategy Log - ${new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}
+## Focus Areas
+- [ ] Implement robust microservice endpoints
+- [ ] Review system diagnostic logs
+- [ ] Coordinate with architecture team
+
+## Technical Notes
+\`\`\`
+const coreConfig = {
+  environment: "production",
+  port: 8080,
+  syncInterval: 30000
+};
+console.log("System initialized on port", coreConfig.port);
+\`\`\`
+
+## Quick Review
+What went well today? What needs attention tomorrow?`,
+
+  weekly: `# Weekly Blueprints - Year 2026
+## Deliverables Completed
+- [x] Initial proof of concept parsed models
+- [x] High-fidelity custom scroll integrations
+
+## Next Objectives
+- [ ] Complete heuristic language auto-detection models
+- [ ] Optimize styling layouts for responsive displays
+
+## Database Migration Script Draft
+\`\`\`
+SELECT user_id, email, created_at 
+FROM accounts 
+WHERE active = 1 
+ORDER BY created_at DESC;
+\`\`\`
+
+## Summary Report`,
+
+  project: `# Project Specs Draft - Obsidian Lite
+## Core Technologies
+- HTML5 Canvas & SVG Layering
+- Dynamic real-time Markdown Parsing
+- LocalStorage state management
+
+## Architecture Interface Code
+\`\`\`
+body {
+  margin: 0;
+  background-color: #0b0f17;
+  color: #f3f4f6;
+  font-family: 'Inter', sans-serif;
+}
+.obsidian-preview {
+  line-height: 1.7;
+}
+\`\`\`
+
+## Key Milestones
+- [ ] Integrate real-time code scanning heuristics
+- [ ] Establish unified multi-pane layout`,
+
+  meeting: `# Meeting Schedule Agenda
+## Participants
+- Lead System Engineer
+- Frontend UX Architect
+
+## Discussion Points
+1. Address the live preview container scrolling issues
+2. Discuss disabling global dashboard technology badges in favor of inline language codeblock heuristics
+
+## JavaScript Action Steps
+\`\`\`
+function handleChecklistChange(lineIndex, isChecked) {
+  const lines = currentNote.content.split('\\n');
+  lines[lineIndex] = isChecked ? "- [x] Finished task" : "- [ ] Incomplete task";
+}
+\`\`\`
+
+## Notes`
+};
+
+// Application State
+let notes = JSON.parse(localStorage.getItem('obsidian_lite_notes')) || DEFAULT_NOTES;
+let currentNoteId = localStorage.getItem('obsidian_lite_current_id') || (notes.length > 0 ? notes[0].id : null);
+let selectedTagFilter = null;
+
+// DOM Selectors
+const sidebar = document.getElementById('sidebar');
+const sidebarToggleBtn = document.getElementById('sidebarToggleBtn');
+const sidebarCloseBtn = document.getElementById('sidebarCloseBtn');
+const searchInput = document.getElementById('searchInput');
+const createNoteBtn = document.getElementById('createNoteBtn');
+const tagsFilterList = document.getElementById('tagsFilterList');
+const noteList = document.getElementById('noteList');
+const noteTitleInput = document.getElementById('noteTitleInput');
+const templateSelect = document.getElementById('templateSelect');
+const cheatSheetToggle = document.getElementById('cheatSheetToggle');
+const saveIndicator = document.getElementById('saveIndicator');
+const deleteNoteBtn = document.getElementById('deleteNoteBtn');
+const noteTagsInput = document.getElementById('noteTagsInput');
+const tabEdit = document.getElementById('tabEdit');
+const tabPreview = document.getElementById('tabPreview');
+const editorPane = document.getElementById('editorPane');
+const previewPaneContainer = document.getElementById('previewPaneContainer');
+const previewPane = document.getElementById('previewPane');
+const statsWords = document.getElementById('statsWords');
+const statsChars = document.getElementById('statsChars');
+const statsReadTime = document.getElementById('statsReadTime');
+const cheatSheetModal = document.getElementById('cheatSheetModal');
+const closeCheatsheetBtns = document.querySelectorAll('.close-cheatsheet-btn');
+const editorInput = document.getElementById('editorInput');
+
+// Guaranteed scrollability setup
+if (previewPane) {
+  previewPane.style.overflowY = 'auto';
+  previewPane.style.height = '100%';
+  previewPane.style.webkitOverflowScrolling = 'touch';
+  previewPane.style.pointerEvents = 'auto';
+}
+
+// Initialize Application
+function init() {
+  renderSidebarNotes();
+  renderTagsFilter();
+  loadNote(currentNoteId);
+  setupEventListeners();
+}
+
+// Render list of note filecards
+function renderSidebarNotes() {
+  const query = searchInput.value.toLowerCase().trim();
+  let filtered = notes;
+
+  if (query) {
+    filtered = filtered.filter(n => 
+      n.title.toLowerCase().includes(query) || 
+      n.content.toLowerCase().includes(query) ||
+      n.tags.toLowerCase().includes(query)
+    );
+  }
+
+  if (selectedTagFilter) {
+    filtered = filtered.filter(n => 
+      n.tags.split(',').map(t => t.trim().toLowerCase()).includes(selectedTagFilter)
+    );
+  }
+
+  // Sort by updatedAt descending
+  filtered.sort((a, b) => b.updatedAt - a.updatedAt);
+
+  noteList.innerHTML = '';
+  
+  if (filtered.length === 0) {
+    noteList.innerHTML = `
+      <div class="text-center py-6 text-zinc-500 text-xs">
+        No documents found
+      </div>
+    `;
     return;
   }
 
-  const chars = fullText.length;
-  const words = fullText.split(/\s+/).filter(w => w.length > 0).length;
+  filtered.forEach(note => {
+    const isActive = note.id === currentNoteId;
+    const itemCard = document.createElement('div');
+    itemCard.className = `file-card p-3 rounded-lg relative cursor-pointer smooth-transition ${isActive ? 'active bg-[#1f293d]/50 border-violet-500/30' : 'hover:bg-zinc-800/40'}`;
+    
+    // Quick preview snippet
+    const snippet = note.content
+      .replace(/[#*`>_-]/g, '')
+      .substring(0, 75) + (note.content.length > 75 ? '...' : '');
+
+    // Render tags
+    const tagsArr = note.tags.split(',').map(t => t.trim()).filter(Boolean);
+    const tagsMarkup = tagsArr.map(t => `
+      <span class="px-1.5 py-0.5 rounded text-[9px] font-mono bg-zinc-800 text-zinc-400 border border-zinc-700/50 hover:text-violet-300 transition-colors">${t}</span>
+    `).join('');
+
+    itemCard.innerHTML = `
+      <div class="flex items-start justify-between gap-1.5">
+        <h4 class="font-semibold text-xs text-zinc-200 truncate ${isActive ? 'text-violet-300' : ''}">${escapeHTML(note.title || 'Untitled Note')}</h4>
+        <span class="text-[9px] text-zinc-500 shrink-0 font-mono">${new Date(note.updatedAt).toLocaleDateString(undefined, {month: 'short', day: 'numeric'})}</span>
+      </div>
+      <p class="text-[10px] text-zinc-400 line-clamp-2 mt-1 leading-relaxed font-sans">${escapeHTML(snippet || 'No additional content')}</p>
+      ${tagsMarkup ? `<div class="flex flex-wrap gap-1 mt-2">${tagsMarkup}</div>` : ''}
+    `;
+
+    itemCard.addEventListener('click', () => {
+      loadNote(note.id);
+      // On mobile, automatically show the preview side when selecting
+      if (window.innerWidth < 1024) {
+        showTab('preview');
+      }
+    });
+
+    noteList.appendChild(itemCard);
+  });
+}
+
+// Render dynamic tag counts and elements
+function renderTagsFilter() {
+  const counts = {};
+  notes.forEach(note => {
+    if (!note.tags) return;
+    note.tags.split(',').forEach(tag => {
+      const clean = tag.trim().toLowerCase();
+      if (clean) {
+        counts[clean] = (counts[clean] || 0) + 1;
+      }
+    });
+  });
+
+  tagsFilterList.innerHTML = '';
+
+  // All category option
+  const allBtn = document.createElement('button');
+  allBtn.className = `w-full text-left text-[11px] py-1 px-2 rounded font-medium smooth-transition flex justify-between items-center ${!selectedTagFilter ? 'bg-violet-950/30 text-violet-300 border-l-2 border-violet-500 pl-1.5' : 'text-zinc-400 hover:text-zinc-200 hover:bg-zinc-800/40'}`;
+  allBtn.innerHTML = `<span>📂 All Documents</span> <span class="text-[9px] font-mono opacity-60">${notes.length}</span>`;
+  allBtn.addEventListener('click', () => {
+    selectedTagFilter = null;
+    renderTagsFilter();
+    renderSidebarNotes();
+  });
+  tagsFilterList.appendChild(allBtn);
+
+  // Dynamic lists tags
+  Object.keys(counts).sort().forEach(tag => {
+    const isSelected = tag === selectedTagFilter;
+    const tagBtn = document.createElement('button');
+    tagBtn.className = `w-full text-left text-[11px] py-1 px-2 rounded font-medium smooth-transition flex justify-between items-center ${isSelected ? 'bg-violet-950/30 text-violet-300 border-l-2 border-violet-500 pl-1.5' : 'text-zinc-400 hover:text-zinc-200 hover:bg-zinc-800/40'}`;
+    tagBtn.innerHTML = `<span># ${tag}</span> <span class="text-[9px] font-mono opacity-60">${counts[tag]}</span>`;
+    tagBtn.addEventListener('click', () => {
+      selectedTagFilter = isSelected ? null : tag;
+      renderTagsFilter();
+      renderSidebarNotes();
+    });
+    tagsFilterList.appendChild(tagBtn);
+  });
+}
+
+// Load a document into editor pane and live preview compiled
+function loadNote(id) {
+  const note = notes.find(n => n.id === id);
+  if (!note) {
+    // Fallback if currentNoteId not found
+    if (notes.length > 0) {
+      loadNote(notes[0].id);
+    } else {
+      currentNoteId = null;
+      disableWorkspace();
+    }
+    return;
+  }
+
+  currentNoteId = id;
+  localStorage.setItem('obsidian_lite_current_id', id);
+
+  // Enable Inputs
+  noteTitleInput.disabled = false;
+  noteTagsInput.disabled = false;
+  editorInput.disabled = false;
+  deleteNoteBtn.disabled = false;
+
+  // Bind values
+  noteTitleInput.value = note.title;
+  noteTagsInput.value = note.tags;
+  editorInput.value = note.content;
+
+  // Build Output Preview Compiled Live
+  updatePreviewAndStats();
+  renderSidebarNotes();
+}
+
+function disableWorkspace() {
+  noteTitleInput.value = '';
+  noteTagsInput.value = '';
+  editorInput.value = '';
+  noteTitleInput.disabled = true;
+  noteTagsInput.disabled = true;
+  editorInput.disabled = true;
+  deleteNoteBtn.disabled = true;
+  previewPane.innerHTML = `<div class="text-zinc-500 italic py-8 text-center">No Document Active. Click "Create New Document" to begin.</div>`;
+  statsWords.innerText = '0';
+  statsChars.innerText = '0';
+  statsReadTime.innerText = '0m';
+}
+
+// Update compiled views, parse markdown heuristics, and calculate footers stats
+function updatePreviewAndStats() {
+  if (!currentNoteId) return;
+  const note = notes.find(n => n.id === currentNoteId);
+  if (!note) return;
+
+  const content = editorInput.value;
+  previewPane.innerHTML = parseMarkdown(content);
+
+  // Handle Checklist change interactions in live previewcompiled 
+  const checkBoxes = previewPane.querySelectorAll('.task-checkbox-interactive');
+  checkBoxes.forEach(box => {
+    box.addEventListener('change', (e) => {
+      const lineIndex = parseInt(e.target.getAttribute('data-line'), 10);
+      const lines = editorInput.value.split('\n');
+      const isChecked = e.target.checked;
+      
+      const lineText = lines[lineIndex];
+      // Replace only task state
+      lines[lineIndex] = lineText.replace(/^([-*]\s+\[)([ xX])(\])/, `$1${isChecked ? 'x' : ' '}$3`);
+      
+      editorInput.value = lines.join('\n');
+      triggerSave();
+      updatePreviewAndStats();
+    });
+  });
+
+  // Handle Dynamic codeblock copy buttons
+  const copyButtons = previewPane.querySelectorAll('.copy-code-btn');
+  copyButtons.forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      const code = decodeURIComponent(btn.getAttribute('data-code'));
+      navigator.clipboard.writeText(code).then(() => {
+        const textSpan = btn.querySelector('span');
+        const origText = textSpan.innerText;
+        textSpan.innerText = 'Copied!';
+        btn.classList.add('text-emerald-400');
+        setTimeout(() => {
+          textSpan.innerText = origText;
+          btn.classList.remove('text-emerald-400');
+        }, 1500);
+      });
+    });
+  });
+
+  // Calculate standard diagnostic content metadata counters
+  const words = content ? content.trim().split(/\s+/).filter(Boolean).length : 0;
+  const chars = content ? content.length : 0;
   const readTime = Math.max(1, Math.ceil(words / 200));
 
   statsWords.innerText = words;
   statsChars.innerText = chars;
-  statsReadTime.innerText = `\${readTime}m`;
+  statsReadTime.innerText = `${readTime}m`;
 }
 
-window.copyCodeText = function(blockId) {
-  const codeEl = document.getElementById(blockId);
-  if (codeEl) {
-    const text = codeEl.innerText;
-    navigator.clipboard.writeText(text).then(() => {
-      const btn = codeEl.closest('.codeblock-container').querySelector('.copy-code-btn');
-      if (btn) {
-        const origHtml = btn.innerHTML;
-        btn.innerHTML = `
-          <svg class="w-3 h-3 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
-          </svg>
-          Copied!
-        `;
-        setTimeout(() => {
-          btn.innerHTML = origHtml;
-        }, 1500);
-      }
-    });
-  }
-};
+// Auto-save mechanisms
+let saveTimeout = null;
+function triggerSave() {
+  if (!currentNoteId) return;
 
+  // Show active syncing status
+  const indicatorIndicator = saveIndicator.querySelector('.saving-pulse');
+  const indicatorText = saveIndicator.querySelector('span:last-child');
+  
+  indicatorIndicator.classList.remove('bg-emerald-500');
+  indicatorIndicator.classList.add('bg-amber-500');
+  indicatorText.innerText = 'Saving...';
+
+  clearTimeout(saveTimeout);
+  saveTimeout = setTimeout(() => {
+    const note = notes.find(n => n.id === currentNoteId);
+    if (note) {
+      note.title = noteTitleInput.value.trim() || 'Untitled Note';
+      note.tags = noteTagsInput.value.trim();
+      note.content = editorInput.value;
+      note.updatedAt = Date.now();
+
+      localStorage.setItem('obsidian_lite_notes', JSON.stringify(notes));
+      renderSidebarNotes();
+      renderTagsFilter();
+
+      // Complete pulse feedback state
+      indicatorIndicator.classList.remove('bg-amber-500');
+      indicatorIndicator.classList.add('bg-emerald-500');
+      indicatorText.innerText = 'Sync Saved';
+    }
+  }, 600);
+}
+
+// Event Bindings
 function setupEventListeners() {
-  noteTitleInput.addEventListener('input', triggerRender);
-  noteTagsInput.addEventListener('input', triggerRender);
-  editorInput.addEventListener('input', triggerRender);
-
-  searchInput.addEventListener('input', (e) => {
-    activeSearchQuery = e.target.value;
-    renderSidebar();
+  // Title / Tags Change
+  noteTitleInput.addEventListener('input', triggerSave);
+  noteTagsInput.addEventListener('input', triggerSave);
+  editorInput.addEventListener('input', () => {
+    updatePreviewAndStats();
+    triggerSave();
   });
 
+  // Document creation trigger action button
   createNoteBtn.addEventListener('click', () => {
-    const newId = `note-\${Math.random().toString(36).substr(2, 9)}`;
     const newNote = {
-      id: newId,
-      title: '📁 New Spec Document',
-      content: '# New Spec Document\\n\\nStart writing markdown formatting context here...',
+      id: 'note-' + Date.now(),
+      title: 'New Document Draft',
+      content: `# New Document Draft\n\nStart writing markdown documents here...`,
       tags: 'draft',
       updatedAt: Date.now()
     };
-    notes.push(newNote);
+    notes.unshift(newNote);
     localStorage.setItem('obsidian_lite_notes', JSON.stringify(notes));
-    selectNote(newId);
+    
+    selectedTagFilter = null;
+    renderTagsFilter();
+    renderSidebarNotes();
+    loadNote(newNote.id);
   });
 
+  // Delete current active document action button
   deleteNoteBtn.addEventListener('click', () => {
-    if (!confirm('Are you absolutely sure you want to permanently delete this document from your workspace?')) return;
-    notes = notes.filter(n => n.id !== activeNoteId);
-    localStorage.setItem('obsidian_lite_notes', JSON.stringify(notes));
-    if (notes.length > 0) {
-      activeNoteId = notes[0].id;
-    } else {
-      activeNoteId = null;
+    if (!currentNoteId) return;
+    if (confirm('Are you absolutely sure you want to permanently delete this document?')) {
+      notes = notes.filter(n => n.id !== currentNoteId);
+      localStorage.setItem('obsidian_lite_notes', JSON.stringify(notes));
+      
+      currentNoteId = notes.length > 0 ? notes[0].id : null;
+      selectedTagFilter = null;
+      renderTagsFilter();
+      renderSidebarNotes();
+      
+      if (currentNoteId) {
+        loadNote(currentNoteId);
+      } else {
+        disableWorkspace();
+      }
     }
-    localStorage.setItem('obsidian_lite_active_id', activeNoteId || '');
-    renderSidebar();
-    loadActiveNote();
   });
 
-  previewPane.addEventListener('change', (e) => {
-    if (e.target.classList.contains('task-checkbox')) {
-      const lineIndex = parseInt(e.target.getAttribute('data-raw-index'), 10);
-      const checked = e.target.checked;
-      
-      const lines = editorInput.value.split('\n');
-      if (lineIndex >= 0 && lineIndex < lines.length) {
-        let line = lines[lineIndex];
-        if (checked) {
-          line = line.replace(/^(\\s*[-*]\\s*)\\[\\s*\\]/, '\$1[x]');
-        } else {
-          line = line.replace(/^(\\s*[-*]\\s*)\\[[xX]\\]/, '\$1[ ]');
-        }
-        lines[lineIndex] = line;
-        
-        editorInput.value = lines.join('\n');
-        triggerRender();
+  // Live document searching
+  searchInput.addEventListener('input', () => {
+    renderSidebarNotes();
+  });
+
+  // Template Injection Selection trigger dropdown
+  templateSelect.addEventListener('change', (e) => {
+    const val = e.target.value;
+    if (val && TEMPLATES[val] && currentNoteId) {
+      if (confirm('Overwrite current contents with chosen template draft specifications?')) {
+        editorInput.value = TEMPLATES[val];
+        noteTitleInput.value = val.charAt(0).toUpperCase() + val.slice(1) + ' Workspace Log';
+        updatePreviewAndStats();
+        triggerSave();
       }
+      e.target.value = ''; // Reset select tag index values
+    }
+  });
+
+  // Sidebar Layout Collapse & Slide view actions
+  sidebarToggleBtn.addEventListener('click', () => {
+    sidebar.classList.toggle('-translate-x-full');
+    sidebar.classList.toggle('lg:translate-x-0');
+  });
+
+  sidebarCloseBtn.addEventListener('click', () => {
+    sidebar.classList.add('-translate-x-full');
+  });
+
+  // Cheatsheet Reference Manual trigger modal actions
+  cheatSheetToggle.addEventListener('click', () => {
+    cheatSheetModal.classList.remove('hidden');
+    cheatSheetModal.classList.add('flex');
+  });
+
+  closeCheatsheetBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      cheatSheetModal.classList.add('hidden');
+      cheatSheetModal.classList.remove('flex');
+    });
+  });
+
+  // Mobile layout switch tabs
+  tabEdit.addEventListener('click', () => showTab('edit'));
+  tabPreview.addEventListener('click', () => showTab('preview'));
+}
+
+// Mobile responsive tab switcher display logic
+function showTab(tab) {
+  if (tab === 'edit') {
+    tabEdit.classList.add('bg-zinc-800', 'text-white');
+    tabEdit.classList.remove('text-zinc-400');
+    tabPreview.classList.remove('bg-zinc-800', 'text-white');
+    tabPreview.classList.add('text-zinc-400');
+
+    editorPane.classList.remove('hidden');
+    editorPane.classList.add('flex');
+    previewPaneContainer.classList.add('hidden');
+    previewPaneContainer.classList.remove('lg:flex');
+  } else {
+    tabPreview.classList.add('bg-zinc-800', 'text-white');
+    tabPreview.classList.remove('text-zinc-400');
+    tabEdit.classList.remove('bg-zinc-800', 'text-white');
+    tabEdit.classList.add('text-zinc-400');
+
+    previewPaneContainer.classList.remove('hidden');
+    previewPaneContainer.classList.add('flex', 'lg:flex');
+    editorPane.classList.add('hidden');
+    editorPane.classList.remove('flex');
+  }
+}
+
+// On DOM load complete
+window.addEventListener('DOMContentLoaded', init);)}\\\`); alert('Copied source code!')" class="hover:text-white smooth-transition text-[10px]">Copy Code</button>
+        </div>
+        <pre><code class="font-mono text-xs block whitespace-pre overflow-x-auto">${escapedCode}</code></pre>
+      </div>
+    `;
+  });
+
+  html = html.replace(/^### (.*$)/gim, '<h3>$1</h3>');
+  html = html.replace(/^## (.*$)/gim, '<h2>$1</h2>');
+  html = html.replace(/^# (.*$)/gim, '<h1>$1</h1>');
+  html = html.replace(/^---$/gim, '<hr class="my-6 border-zinc-800" />');
+  html = html.replace(/^\\> (.*$)/gim, '<blockquote>$1</blockquote>');
+  html = html.replace(/==([^==\\n]+)==/g, '<mark class="highlight">$1</mark>');
+  html = html.replace(/::([^::\\n]+)::/g, '<span class="kbd-capsule font-mono font-bold">$1</span>');
+  html = html.replace(/\\*\\*([^\\*\\n]+)\\*\\*/g, '<strong>$1</strong>');
+  html = html.replace(/\\*([^\\*\\n]+)\\*/g, '<em>$1</em>');
+  html = html.replace(/~~([^~\\n]+)~~/g, '<del>$1</del>');
+
+  html = html.replace(/^\\- \\[[xX]\\] (.*$)/gim, `
+    <div class="flex items-center gap-2.5 my-1.5">
+      <input type="checkbox" checked class="rounded accent-violet-600 bg-zinc-900 border-zinc-700 w-4 h-4 cursor-pointer">
+      <label class="text-xs text-zinc-400 line-through">$1</label>
+    </div>
+  `);
+  html = html.replace(/^\\- \\[[\\s]\\] (.*$)/gim, `
+    <div class="flex items-center gap-2.5 my-1.5">
+      <input type="checkbox" class="rounded accent-violet-600 bg-zinc-900 border-zinc-700 w-4 h-4 cursor-pointer">
+      <label class="text-xs text-zinc-200">$1</label>
+    </div>
+  `);
+
+  html = html.replace(/^\\- (?!\[[ xX]\])(.*$)/gim, '<ul><li>$1</li></ul>');
+  html = html.replace(/<\\/ul>\\s*<ul>/g, '');
+  html = html.replace(/^\\d+\\. (.*$)/gim, '<ol><li>$1</li></ol>');
+  html = html.replace(/<\\/ol>\\s*<ol>/g, '');
+
+  const lines = html.split('\\n');
+  const processedLines = lines.map(line => {
+    const trimmed = line.trim();
+    if (!trimmed) return '<br>';
+    if (trimmed.startsWith('<h') || 
+        trimmed.startsWith('<hr') || 
+        trimmed.startsWith('<div') || 
+        trimmed.startsWith('</div') || 
+        trimmed.startsWith('<blockquote') || 
+        trimmed.startsWith('<ul') || 
+        trimmed.startsWith('</ul') || 
+        trimmed.startsWith('<ol') || 
+        trimmed.startsWith('</ol') || 
+        trimmed.startsWith('<li') || 
+        trimmed.startsWith('</li') || 
+        trimmed.startsWith('<pre') || 
+        trimmed.startsWith('</pre') || 
+        trimmed.startsWith('<table') || 
+        trimmed.startsWith('</table') || 
+        trimmed.startsWith('<tr') || 
+        trimmed.startsWith('</tr') || 
+        trimmed.startsWith('<th') || 
+        trimmed.startsWith('<td')
+    ) {
+      return line;
+    }
+    return `<p>${line}</p>`;
+  });
+
+  html = processedLines.join('\\n');
+  html = html.replace(/<p><br><\\/p>/g, '<br>');
+
+  return html;
+}
+
+function toggleChecklistStateInMarkdown(index, isChecked) {
+  const currentNote = notes.find(n => n.id === activeNoteId);
+  if (!currentNote) return;
+
+  let checklistCounter = 0;
+  const lines = currentNote.content.split('\\n');
+  const modifiedLines = lines.map(line => {
+    if (line.match(/^\\- \\[[xX\\s]\\]/)) {
+      if (checklistCounter === index) {
+        line = isChecked ? line.replace(/^\\- \\[\\s\\]/, '- [x]') : line.replace(/^\\- \\[[xX]\]/, '- [ ]');
+      } 
+      checklistCounter++;
+    }
+    return line;
+  });
+
+  currentNote.content = modifiedLines.join('\\n');
+  currentNote.updatedAt = Date.now();
+  
+  editorInput.value = currentNote.content;
+  saveData();
+  updatePreview();
+  renderSidebarNotes();
+}
+
+function updateStats() {
+  const text = editorInput.value || "";
+  const chars = text.length;
+  const words = text.trim() ? text.trim().split(/\\s+/).length : 0;
+  const minutes = Math.max(1, Math.round(words / 200));
+
+  statsWords.textContent = words;
+  statsChars.textContent = chars;
+  statsReadTime.textContent = `${minutes}m`;
+}
+
+function saveData() {
+  showSavingStatus();
+  localStorage.setItem('obsidian_lite_notes', JSON.stringify(notes));
+  
+  setTimeout(() => {
+    showSavedStatus();
+  }, 400);
+}
+
+function showSavingStatus() {
+  saveIndicator.innerHTML = `
+    <span class="inline-block w-2.5 h-2.5 rounded-full bg-amber-500 mr-2 animate-bounce"></span>
+    <span class="text-xs text-zinc-300 font-semibold tracking-wide uppercase">Syncing...</span>
+  `;
+}
+
+function showSavedStatus() {
+  saveIndicator.innerHTML = `
+    <span class="inline-block w-2.5 h-2.5 rounded-full bg-emerald-500 mr-2"></span>
+    <span class="text-xs text-zinc-300 font-semibold tracking-wide uppercase">Sync Saved</span>
+  `;
+}
+
+function setupEventListeners() {
+  let autoSaveTimeout;
+  editorInput.addEventListener('input', () => {
+    const activeNote = notes.find(n => n.id === activeNoteId);
+    if (activeNote) {
+      activeNote.content = editorInput.value;
+      activeNote.updatedAt = Date.now();
+      
+      updatePreview();
+      updateStats();
+      
+      clearTimeout(autoSaveTimeout);
+      autoSaveTimeout = setTimeout(() => {
+        saveData();
+        renderSidebarNotes();
+      }, 1000);
+    }
+  });
+
+  noteTitleInput.addEventListener('input', () => {
+    const activeNote = notes.find(n => n.id === activeNoteId);
+    if (activeNote) {
+      activeNote.title = noteTitleInput.value || "Untitled Note";
+      activeNote.updatedAt = Date.now();
+      
+      clearTimeout(autoSaveTimeout);
+      autoSaveTimeout = setTimeout(() => {
+        saveData();
+        renderSidebarNotes();
+      }, 1000);
+    }
+  });
+
+  noteTagsInput.addEventListener('input', () => {
+    const activeNote = notes.find(n => n.id === activeNoteId);
+    if (activeNote) {
+      activeNote.tags = noteTagsInput.value;
+      activeNote.updatedAt = Date.now();
+      
+      clearTimeout(autoSaveTimeout);
+      autoSaveTimeout = setTimeout(() => {
+        saveData();
+        renderSidebarNotes();
+        renderTagsFilter();
+      }, 1200);
     }
   });
 
   templateSelect.addEventListener('change', (e) => {
     const type = e.target.value;
-    if (!type || !activeNoteId) return;
-
-    let textToInject = '';
-    const dateStr = new Date().toLocaleDateString(undefined, { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
-
-    switch (type) {
-      case 'daily':
-        textToInject = `\\n\\n# Daily Strategy Log - \${dateStr}\\n\\n## 🎯 Daily Core Objectives\\n- [ ] Task 1: Initialize developer test suit\\n- [ ] Task 2: Deliver component interface feedback\\n\\n## 📊 Performance Indicators\\n| Metric | Expected Target | Progress Status |\\n| :--- | :--- | :--- |\\n| Core Speed | Under 100ms | Excellent |\\n| Coverage | 95% Minimum | In Progress |\\n\\n> Focus for today: "Simplify execution paths, ensure zero-dependency styling loops."`;
-        break;
-      case 'weekly':
-        textToInject = `\\n\\n# Weekly Blueprints\\n\\n## 🗺️ High-Level Focus\\n- Outline roadmap architecture\\n- Standardize metadata schemas\\n\\n## 🛠️ Tech Stack Under Review\\n- React Native for companion client apps\\n- TypeScript for absolute safety guards\\n\\n> Quote of the week: "Consistency breeds excellence."`;
-        break;
-      case 'project':
-        textToInject = `\\n\\n# Project Specifications Draft\\n\\n## 📝 Specifications Detail\\n- [ ] Setup production build configurations\\n- [ ] Document integration variables\\n\\n## ⚙️ Build System Requirements\\n| Component | Engine | Release Version |\\n| :--- | :---: | :--- |\\n| Bundling | Vite / Turbopack | Latest Stable |\\n| Language | TypeScript 5 | Enterprise |`;
-        break;
-      case 'meeting':
-        textToInject = `\\n\\n# Meeting Agenda - \${dateStr}\\n\\n## 👥 Attendance & Roles\\n- Product Management (Chair)\\n- Engineering Team (Updates)\\n\\n## 📌 Discussed Points\\n> "We must finalize deployment targets and scale resources before next Tuesday."`;
-        break;
+    if (type && TEMPLATES[type]) {
+      const activeNote = notes.find(n => n.id === activeNoteId);
+      if (activeNote) {
+        if (confirm("Incorporate the selected layout spec into your current text body?")) {
+          activeNote.content += "\\n\\n" + TEMPLATES[type];
+          activeNote.updatedAt = Date.now();
+          editorInput.value = activeNote.content;
+          
+          updatePreview();
+          updateStats();
+          saveData();
+          renderSidebarNotes();
+        }
+      }
     }
+    templateSelect.value = "";
+  });
 
-    const startPos = editorInput.selectionStart;
-    const endPos = editorInput.selectionEnd;
-    const originalText = editorInput.value;
+  createNoteBtn.addEventListener('click', () => {
+    const newNote = {
+      id: String(Date.now()),
+      title: "✨ Brand New Space Document",
+      content: `# New Obsidian Document\\n\\nStart drafting beautiful markdown files right here...`,
+      tags: "draft, architecture",
+      updatedAt: Date.now()
+    };
+    notes.unshift(newNote);
+    activeNoteId = newNote.id;
+    
+    saveData();
+    renderSidebarNotes();
+    renderTagsFilter();
+    loadActiveNote();
+    
+    editorInput.focus();
+  });
 
-    if (startPos || startPos === 0) {
-      editorInput.value = originalText.substring(0, startPos) + textToInject + originalText.substring(endPos);
-    } else {
-      editorInput.value += textToInject;
+  deleteNoteBtn.addEventListener('click', () => {
+    if (confirm("Are you sure you want to permanently delete this document? This action cannot be undone.")) {
+      notes = notes.filter(n => n.id !== activeNoteId);
+      if (notes.length > 0) {
+        activeNoteId = notes[0].id;
+      } else {
+        activeNoteId = null;
+      }
+      
+      saveData();
+      renderSidebarNotes();
+      renderTagsFilter();
+      loadActiveNote();
     }
+  });
 
-    e.target.value = '';
-    triggerRender();
+  searchInput.addEventListener('input', (e) => {
+    searchQuery = e.target.value;
+    renderSidebarNotes();
   });
 
   tabEdit.addEventListener('click', () => {
-    tabEdit.classList.add('bg-zinc-800', 'text-white');
-    tabEdit.classList.remove('text-zinc-400');
-    tabPreview.classList.add('text-zinc-400');
-    tabPreview.classList.remove('bg-zinc-800', 'text-white');
-
     editorPane.classList.remove('hidden');
     previewPaneContainer.classList.add('hidden');
+    
+    tabEdit.className = "flex-1 py-3 text-center text-xs font-bold bg-zinc-800 text-white border-r border-zinc-800 flex items-center justify-center gap-2";
+    tabPreview.className = "flex-1 py-3 text-center text-xs font-bold text-zinc-400 flex items-center justify-center gap-2";
   });
 
   tabPreview.addEventListener('click', () => {
-    tabPreview.classList.add('bg-zinc-800', 'text-white');
-    tabPreview.classList.remove('text-zinc-400');
-    tabEdit.classList.add('text-zinc-400');
-    tabEdit.classList.remove('bg-zinc-800', 'text-white');
-
-    previewPaneContainer.classList.remove('hidden');
     editorPane.classList.add('hidden');
+    previewPaneContainer.classList.remove('hidden');
+    previewPaneContainer.classList.add('flex');
+    
+    tabEdit.className = "flex-1 py-3 text-center text-xs font-bold text-zinc-400 border-r border-zinc-800 flex items-center justify-center gap-2";
+    tabPreview.className = "flex-1 py-3 text-center text-xs font-bold bg-zinc-800 text-white flex items-center justify-center gap-2";
   });
 
   sidebarToggleBtn.addEventListener('click', () => {
@@ -695,846 +1431,833 @@ function setupEventListeners() {
       cheatSheetModal.classList.remove('flex');
     }
   });
+
+  window.addEventListener('keydown', (e) => {
+    if ((e.ctrlKey || e.metaKey) && e.key === 's') {
+      e.preventDefault();
+      saveData();
+    }
+  });
 }
 
-document.addEventListener('DOMContentLoaded', initApp);/**
- * logics/app.js
- * Premium Vanilla ES6 Markdown Engine Controller
- * Integrated with localStorage, auto-saving indicators, live templates, custom tagging, and metadata tracking.
- * Year: 2026
- */
+window.addEventListener('DOMContentLoaded', init);// Heuristic Language Scanner for Markdown Codeblocks
+function detectLanguage(code) {
+  const trimmed = code.trim();
+  if (trimmed.startsWith('{') && trimmed.endsWith('}') && trimmed.includes('"')) return 'json';
+  if (/<[a-z][\s\S]*>/i.test(trimmed) || trimmed.includes('<!DOCTYPE html>') || trimmed.includes('</div>')) return 'html';
+  if (/(const|let|var|function|console\.log|import\s|export\s|document\.)/g.test(trimmed)) return 'javascript';
+  if (/(def\s+[a-zA-Z_]|import\s+[a-zA-Z_]|print\s*\(|elif\s+|if\s+__name__)/g.test(trimmed)) return 'python';
+  if (/(SELECT\s+|FROM\s+|WHERE\s+|INSERT\s+INTO|UPDATE\s+|DELETE\s+FROM)/i.test(trimmed)) return 'sql';
+  if (/(margin:|padding:|color:|display:|background:|@media|@import)/.test(trimmed)) return 'css';
+  if (/(sudo\s+|npm\s+|git\s+|echo\s+|mkdir\s+)/.test(trimmed)) return 'shell';
+  return 'javascript'; // Default intelligent fallback
+}
 
-// Custom High-Fidelity Markdown Parser Engine
-class MarkdownEngine {
-  static parse(markdown) {
-    if (!markdown) return '<p class="text-zinc-500 italic">No content. Start writing here...</p>';
-    let html = markdown;
+// Custom Markdown Parser with interactive elements and language scans
+function parseMarkdown(md) {
+  if (!md) return '<div class="text-zinc-500 italic py-8 text-center">Start writing to compile live output preview...</div>';
 
-    // 1. Escape HTML entities to prevent XSS issues while maintaining performance
-    html = html
-      .replace(/&/g, '&amp;')
-      .replace(/</g, '&lt;')
-      .replace(/>/g, '&gt;');
+  let html = md
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;');
 
-    // 2. Code blocks (```lang ... ```) with modern headers and copy buttons
-    html = html.replace(/```(\w*)\n([\s\S]*?)\n```/g, (match, lang, code) => {
-      const cleanCode = code.trim();
-      const language = lang || 'plaintext';
-      return `
-<div class="code-block-wrapper my-6 rounded-lg overflow-hidden border border-zinc-800 bg-[#111827]">
-  <div class="code-block-header flex items-center justify-between px-4 py-1.5 bg-[#0f172a] border-b border-zinc-800 text-[11px] text-zinc-400 font-mono">
-    <span class="uppercase tracking-wider font-semibold text-violet-400">${language}</span>
-    <button onclick="(function(btn){ navigator.clipboard.writeText(decodeURIComponent('${encodeURIComponent(cleanCode)}')).then(function(){ const orig = btn.innerHTML; btn.innerHTML = 'Copied!'; btn.classList.add('text-emerald-400'); setTimeout(function(){ btn.innerHTML = orig; btn.classList.remove('text-emerald-400'); }, 1500); }); })(this)" class="flex items-center gap-1 hover:text-white transition duration-150">
-      <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3" />
-      </svg>
-      <span>Copy</span>
-    </button>
-  </div>
-  <pre class="!m-0 !p-4 overflow-x-auto bg-[#111827]/60"><code class="language-${language}">${cleanCode}</code></pre>
-</div>`;
+  const codeBlocks = [];
+  html = html.replace(/```([\s\S]*?)```/gm, (match, content) => {
+    const lines = content.split('\n');
+    let lang = lines[0].trim();
+    let codeContent = '';
+    if (lang && /^[a-zA-Z0-9#+-]+$/.test(lang)) {
+      codeContent = lines.slice(1).join('\n');
+    } else {
+      lang = '';
+      codeContent = content;
+    }
+    
+    // Auto detect language with real-time heuristic content scanner
+    const detected = detectLanguage(codeContent);
+    const finalLang = lang || detected || 'text';
+    
+    const placeholder = `__CODE_BLOCK_PLACEHOLDER_${codeBlocks.length}__`;
+    codeBlocks.push({
+      lang: finalLang,
+      content: codeContent.trim()
     });
+    return placeholder;
+  });
 
-    // 3. Inline Code (`code`)
-    html = html.replace(/`([^`\n]+)`/g, '<code>$1</code>');
+  const lines = html.split('\n');
+  let result = [];
+  let inList = false;
+  let listType = null; 
+  let inTable = false;
+  let tableHeaders = [];
+  let tableRows = [];
 
-    // 4. Headers with interactive hash anchors (H1 - H6)
-    html = html.replace(/^(#{1,6})\s+(.+)$/gm, (match, hashes, title) => {
-      const level = hashes.length;
-      const cleanTitle = title.trim();
-      const slug = cleanTitle.toLowerCase().replace(/[^\w]+/g, '-');
-      return `<h${level} id="${slug}">${cleanTitle}</h${level}>`;
-    });
+  for (let i = 0; i < lines.length; i++) {
+    let line = lines[i];
+    const isTableRow = line.trim().startsWith('|') && line.trim().endsWith('|');
 
-    // 5. Blockquotes (Group consecutive lines and handle HTML-escaped standard '>' markers correctly)
-    html = html.replace(/^(?:&gt;|>)[ \t]+([\s\S]*?)$/gm, '<blockquote>$1</blockquote>');
-    html = html.replace(/<\/blockquote>\s*<blockquote>/g, '<br>');
-
-    // 6. Horizontal Rules
-    html = html.replace(/^(\s*[-*_]){3,}\s*$/gm, '<hr>');
-
-    // 7. Interactive Tasks Checklist (- [ ] and - [x])
-    let taskIndex = 0;
-    html = html.replace(/^([ \t]*)-\s+\[([ xX])\]\s+(.+)$/gm, (match, indent, checked, label) => {
-      const isChecked = checked.toLowerCase() === 'x';
-      const doneClass = isChecked ? 'task-list-item-done' : '';
-      return `<li class="task-list-item ${doneClass}">
-        <input type="checkbox" ${isChecked ? 'checked' : ''} data-task-id="${taskIndex++}">
-        <span class="ml-1">${label.trim()}</span>
-      </li>`;
-    });
-
-    // 8. Unordered Lists (excluding checklists handled above)
-    html = html.replace(/^([ \t]*)[*+-]\s+(.+)$/gm, (match, indent, text) => {
-      if (text.startsWith('[ ]') || text.startsWith('[x]') || text.startsWith('[X]')) {
-        return match;
+    if (isTableRow) {
+      if (inList) {
+        result.push(`</${listType}>`);
+        inList = false;
+        listType = null;
       }
-      return `<ul><li>${text.trim()}</li></ul>`;
-    });
-    html = html.replace(/<\/ul>\n<ul>/g, '');
-
-    // 9. Ordered Lists
-    html = html.replace(/^([ \t]*)\d+\.\s+(.+)$/gm, '<ol><li>$2</li></ol>');
-    html = html.replace(/<\/ol>\n<ol>/g, '');
-
-    // 10. Styled Bold, Italics, Strikethroughs, and Highlights
-    html = html.replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>');
-    html = html.replace(/\*([^*]+)\*/g, '<em>$1</em>');
-    html = html.replace(/__([^_]+)__/g, '<strong>$1</strong>');
-    html = html.replace(/_([^_]+)_/g, '<em>$1</em>');
-    html = html.replace(/~~([^~]+)~~/g, '<del>$1</del>');
-    html = html.replace(/==([^=]+)==/g, '<mark>$1</mark>');
-
-    // 11. Custom Highlights for specific Markdown shortcuts (Optional convenience)
-    html = html.replace(/::([^:]+)::/g, '<kbd>$1</kbd>');
-
-    // 12. Auto-Link Parsing
-    html = html.replace(/(https?:\/\/[^\s<]+)/g, '<a href="$1" target="_blank" class="text-violet-400 hover:underline inline-flex items-center gap-1">$1 ↗</a>');
-
-    // 13. Dynamic High-fidelity Table Generator
-    const lines = html.split('\n');
-    let inTable = false;
-    let tableHeaders = [];
-    let tableAlignments = [];
-    let tableRows = [];
-    let parsedLines = [];
-
-    for (let i = 0; i < lines.length; i++) {
-      const line = lines[i].trim();
-      if (line.startsWith('|') && line.endsWith('|')) {
-        const parts = line.split('|').map(s => s.trim()).filter((s, idx, arr) => idx > 0 && idx < arr.length - 1);
-        
-        if (!inTable) {
-          const nextLine = lines[i+1] ? lines[i+1].trim() : '';
-          if (nextLine.startsWith('|') && nextLine.includes('-')) {
-            inTable = true;
-            tableHeaders = parts;
-            const alignmentParts = nextLine.split('|').map(s => s.trim()).filter((s, idx, arr) => idx > 0 && idx < arr.length - 1);
-            tableAlignments = alignmentParts.map(s => {
-              if (s.startsWith(':') && s.endsWith(':')) return 'center';
-              if (s.endsWith(':')) return 'right';
-              return 'left';
-            });
-            i++; // skip separator
-            continue;
-          }
-        }
-        
-        if (inTable) {
-          tableRows.push(parts);
-        }
+      
+      const cells = line.split('|').map(c => c.trim()).filter((c, idx, arr) => idx > 0 && idx < arr.length - 1);
+      
+      if (!inTable) {
+        inTable = true;
+        tableHeaders = cells;
       } else {
-        if (inTable) {
-          parsedLines.push(MarkdownEngine.renderTableHTML(tableHeaders, tableAlignments, tableRows));
-          inTable = false;
-          tableHeaders = [];
-          tableAlignments = [];
-          tableRows = [];
+        const isSeparator = cells.every(c => /^:?-+:?$/.test(c));
+        if (!isSeparator) {
+          tableRows.push(cells);
         }
-        parsedLines.push(lines[i]);
+      }
+      continue;
+    } else {
+      if (inTable) {
+        let tableHtml = '<table><thead><tr>';
+        tableHeaders.forEach(h => {
+          tableHtml += `<th>${parseInlineMarkdown(h)}</th>`;
+        });
+        tableHtml += '</tr></thead><tbody>';
+        tableRows.forEach(row => {
+          tableHtml += '<tr>';
+          for (let j = 0; j < tableHeaders.length; j++) {
+            tableHtml += `<td>${parseInlineMarkdown(row[j] || '')}</td>`;
+          }
+          tableHtml += '</tr>';
+        });
+        tableHtml += '</tbody></table>';
+        result.push(tableHtml);
+        
+        inTable = false;
+        tableHeaders = [];
+        tableRows = [];
       }
     }
+
+    if (/^(?:-{3,}|\*{3,}|\_{3,})$/.test(line.trim())) {
+      if (inList) { result.push(`</${listType}>`); inList = false; listType = null; }
+      result.push('<hr>');
+      continue;
+    }
+
+    const headingMatch = line.match(/^(#{1,6})\s+(.*)$/);
+    if (headingMatch) {
+      if (inList) { result.push(`</${listType}>`); inList = false; listType = null; }
+      const level = headingMatch[1].length;
+      const content = parseInlineMarkdown(headingMatch[2]);
+      result.push(`<h${level}>${content}</h${level}>`);
+      continue;
+    }
+
+    const blockquoteMatch = line.match(/^&gt;\s?(.*)$/);
+    if (blockquoteMatch) {
+      if (inList) { result.push(`</${listType}>`); inList = false; listType = null; }
+      const content = parseInlineMarkdown(blockquoteMatch[1]);
+      result.push(`<blockquote><p>${content}</p></blockquote>`);
+      continue;
+    }
+
+    const taskMatch = line.match(/^[-*]\s+\[([ xX])\]\s+(.*)$/);
+    if (taskMatch) {
+      if (inList && listType !== 'ul') {
+        result.push(`</${listType}>`);
+        inList = false;
+      }
+      if (!inList) {
+        result.push('<ul class="task-list">');
+        inList = true;
+        listType = 'ul';
+      }
+      const checked = taskMatch[1].toLowerCase() === 'x';
+      const content = parseInlineMarkdown(taskMatch[2]);
+      result.push(`
+        <li class="task-list-item ${checked ? 'task-list-item-done' : ''}">
+          <input type="checkbox" data-line="${i}" ${checked ? 'checked' : ''} class="task-checkbox-interactive">
+          <span>${content}</span>
+        </li>
+      `);
+      continue;
+    }
+
+    const ulMatch = line.match(/^[-*]\s+(.*)$/);
+    if (ulMatch) {
+      if (inList && listType !== 'ul') {
+        result.push(`</${listType}>`);
+        inList = false;
+      }
+      if (!inList) {
+        result.push('<ul>');
+        inList = true;
+        listType = 'ul';
+      }
+      const content = parseInlineMarkdown(ulMatch[1]);
+      result.push(`<li>${content}</li>`);
+      continue;
+    }
+
+    const olMatch = line.match(/^(\d+)\.\s+(.*)$/);
+    if (olMatch) {
+      if (inList && listType !== 'ol') {
+        result.push(`</${listType}>`);
+        inList = false;
+      }
+      if (!inList) {
+        result.push('<ol>');
+        inList = true;
+        listType = 'ol';
+      }
+      const content = parseInlineMarkdown(olMatch[2]);
+      result.push(`<li>${content}</li>`);
+      continue;
+    }
+
+    if (line.trim() === '') {
+      if (inList) {
+        result.push(`</${listType}>`);
+        inList = false;
+        listType = null;
+      }
+      result.push('<br>');
+      continue;
+    }
+
+    if (inList) {
+      result.push(`</${listType}>`);
+      inList = false;
+      listType = null;
+    }
+    result.push(`<p>${parseInlineMarkdown(line)}</p>`);
+  }
+
+  if (inTable) {
+    let tableHtml = '<table><thead><tr>';
+    tableHeaders.forEach(h => { tableHtml += `<th>${parseInlineMarkdown(h)}</th>`; });
+    tableHtml += '</tr></thead><tbody>';
+    tableRows.forEach(row => {
+      tableHtml += '<tr>';
+      for (let j = 0; j < tableHeaders.length; j++) {
+        tableHtml += `<td>${parseInlineMarkdown(row[j] || '')}</td>`;
+      }
+      tableHtml += '</tr>';
+    });
+    tableHtml += '</tbody></table>';
+    result.push(tableHtml);
+  }
+  if (inList) {
+    result.push(`</${listType}>`);
+  }
+
+  let renderedHtml = result.join('\n');
+  codeBlocks.forEach((block, idx) => {
+    const placeholder = `__CODE_BLOCK_PLACEHOLDER_${idx}__`;
+    const escapedCode = block.content
+      .replace(/&amp;/g, '&')
+      .replace(/&lt;/g, '<')
+      .replace(/&gt;/g, '>');
     
-    if (inTable) {
-      parsedLines.push(MarkdownEngine.renderTableHTML(tableHeaders, tableAlignments, tableRows));
-    }
+    const customBlock = `
+      <div class="code-block-wrapper my-6 border border-zinc-800 rounded-lg overflow-hidden bg-[#090d16]">
+        <div class="codeblock-header flex items-center justify-between px-4 py-2 bg-[#111827] text-xs border-b border-zinc-800">
+          <span class="codeblock-lang-badge uppercase font-bold tracking-wider text-violet-400">${block.lang}</span>
+          <button class="copy-code-btn text-zinc-500 hover:text-zinc-200 flex items-center gap-1.5 transition-colors" data-code="${encodeURIComponent(escapCode)}">
+            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3" />
+            </svg>
+            <span>Copy</span>
+          </button>
+        </div>
+        <pre class="m-0 bg-[#090d16] p-4 overflow-x-auto"><code class="language-${block.lang} text-zinc-300 font-mono text-xs leading-relaxed">${escapeHTML(escapCode)}</code></pre>
+      </div>
+    `;
+    renderedHtml = renderedHtml.replace(placeholder, customBlock);
+  });
 
-    html = parsedLines.join('\n');
-
-    // Convert spacing gaps to paragraphs
-    html = html.replace(/\n\n/g, '<p class="my-4"></p>');
-
-    return html;
-  }
-
-  static renderTableHTML(headers, alignments, rows) {
-    let html = `
-    <div class="overflow-x-auto my-6 rounded-xl border border-zinc-800 bg-gradient-to-b from-[#111827] to-[#0b0f17] shadow-xl">
-      <table class="w-full border-collapse">
-        <thead>
-          <tr class="bg-gradient-to-r from-zinc-900 to-zinc-950 border-b border-zinc-800">`;
-    headers.forEach((h, idx) => {
-      const align = alignments[idx] || 'left';
-      html += `
-            <th class="px-4 py-3 text-zinc-200 font-bold text-xs uppercase tracking-wider text-${align}" style="text-align: ${align}">
-              ${h}
-            </th>`;
-    });
-    html += `
-          </tr>
-        </thead>
-        <tbody class="divide-y divide-zinc-800/50">`;
-    rows.forEach((row, rIdx) => {
-      const rowBg = rIdx % 2 === 0 ? 'bg-[#161b26]/30' : 'bg-transparent';
-      html += `
-          <tr class="${rowBg} hover:bg-violet-600/5 transition duration-150">`;
-      for (let idx = 0; idx < headers.length; idx++) {
-        const cell = row[idx] || '';
-        const align = alignments[idx] || 'left';
-        html += `
-            <td class="px-4 py-3 text-zinc-300 text-sm" style="text-align: ${align}">
-              ${cell}
-            </td>`;
-      }
-      html += `
-          </tr>`;
-    });
-    html += `
-        </tbody>
-      </table>
-    </div>`;
-    return html;
-  }
+  return renderedHtml;
 }
 
-// Built-in Premium System Starter Templates
-const NOTE_TEMPLATES = {
-  daily: `# Daily Log - 2026-03-31 🪐
+function parseInlineMarkdown(text) {
+  return text
+    .replace(/\*\*([\s\S]*?)\*\*/g, '<strong>$1</strong>')
+    .replace(/\*([\s\S]*?)\*/g, '<em>$1</em>')
+    .replace(/~~([\s\S]*?)~~/g, '<del>$1</del>')
+    .replace(/==([\s\S]*?)==/g, '<mark>$1</mark>')
+    .replace(/::([\s\S]*?)::/g, '<kbd>$1</kbd>')
+    .replace(/`([\s\S]*?)`/g, '<code>$1</code>');
+}
 
-## Today's Core Strategy
-- [ ] Complete critical design implementation details
-- [ ] Review stateful synchronization logs
+function escapeHTML(str) {
+  return str.replace(/[&<>'"]/g, 
+    tag => ({
+      '&': '&amp;',
+      '<': '&lt;',
+      '>': '&gt;',
+      "'": '&#39;',
+      '"': '&quot;'
+    }[tag] || tag)
+  );
+}
 
-## Timetable Schedule
-* **09:00 AM** - Team Architecture Alignment Sync
-* **10:30 AM** - Markdown Parser Feature Refinement
-* **03:00 PM** - Performance Metrics Review
+// Preloaded Default Documents
+const DEFAULT_NOTES = [
+  {
+    id: 'note-1',
+    title: 'Welcome to Obsidian Lite',
+    content: `# Welcome to Obsidian Lite 🪐
+This is a premium dark-themed Markdown workspace designed for high-fidelity technical editing, blueprints, and dynamic strategizing. 
 
-## Brainstorming & Observations
-> "Consistency is the compounding engine of progress."
-==Double equal signs create brilliant highlighted marks to keep core tasks prominent.==`,
+## Integrated Real-Time Scanning
+This application has **disabled the external global technology dashboard** in favor of high-performance **real-time heuristic code scanning** integrated directly into the markdown compiler. 
 
-  weekly: `# Weekly Review & Strategy Blueprint
+Let's test the heuristic content language identification below:
 
-## Key Milestones Met
-- [x] Integrate dual-pane side-by-side editing interface
-- [x] Complete Markdown Engine and auto-saving logic
-
-## Strategic Goals Next Week
-- [ ] Incorporate comprehensive telemetry analysis
-- [ ] Optimize custom keybinding accelerators
-
-## Executive Reflections
-* Keep UX responsive, clean, and styled beautifully.`,
-
-  project: `# Project Specification Document
-
-## Executive Overview
-A zero-dependency high-performance Markdown editing tool built purely on modern ES6 specifications.
-
-## Priority Feature Matrix
-| Feature Goal | Target Phase | Status |
-| :--- | :---: | :---: |
-| Collapsible Sidebars | Phase 1 | Complete |
-| Local Storage Sync | Phase 1 | Active |
-| Interactive Previews | Phase 2 | Complete |
-
-## Implementation Stack
-- HTML5 Custom Customizations
-- Tailwind CSS CDN Layout
-- Vanilla JavaScript Core`,
-
-  meeting: `# Meeting Agenda & Minutes
-
-**Date:** 2026-03-31  
-**Topic:** Core State Sync Logic  
-**Lead Facilitator:** Senior Platform Architect  
-
-## Key Takeaways & Agreements
-1. Run parsing inside a lightweight debounced wrapper to prevent UI stutters.
-2. Enable direct checkbox interaction in the real-time preview frame.
-
-## Deliverables Checklist
-- [ ] Deliver application script (logics/app.js)
-- [ ] Verify Tailwind components align cleanly`
+\`\`\`
+const workspace = {
+  version: 2026,
+  theme: "Obsidian Slate",
+  features: ["Markdown Live compiler", "Autosave", "Interactive checklist Sync"]
 };
-
-// Main State & Controller Logic
-class AppController {
-  constructor() {
-    this.notes = [];
-    this.activeNoteId = null;
-    this.searchQuery = '';
-    this.selectedTagFilter = '';
-    this.saveTimeout = null;
-
-    // Cache DOM Elements
-    this.dom = {
-      noteList: document.getElementById('noteList'),
-      editorInput: document.getElementById('editorInput'),
-      previewPane: document.getElementById('previewPane'),
-      searchInput: document.getElementById('searchInput'),
-      tagsFilterList: document.getElementById('tagsFilterList'),
-      noteTitleInput: document.getElementById('noteTitleInput'),
-      noteTagsInput: document.getElementById('noteTagsInput'),
-      saveIndicator: document.getElementById('saveIndicator'),
-      createNoteBtn: document.getElementById('createNoteBtn'),
-      deleteNoteBtn: document.getElementById('deleteNoteBtn'),
-      sidebar: document.getElementById('sidebar'),
-      sidebarToggleBtn: document.getElementById('sidebarToggleBtn'),
-      sidebarCloseBtn: document.getElementById('sidebarCloseBtn'),
-      templateSelect: document.getElementById('templateSelect'),
-      statsWords: document.getElementById('statsWords'),
-      statsChars: document.getElementById('statsChars'),
-      statsReadTime: document.getElementById('statsReadTime'),
-      cheatSheetToggle: document.getElementById('cheatSheetToggle'),
-      cheatSheetModal: document.getElementById('cheatSheetModal'),
-      closeCheatSheetBtns: document.querySelectorAll('.close-cheatsheet-btn'),
-      editorPane: document.getElementById('editorPane'),
-      previewPaneContainer: document.getElementById('previewPaneContainer'),
-      tabEdit: document.getElementById('tabEdit'),
-      tabPreview: document.getElementById('tabPreview')
-    };
-
-    this.init();
-  }
-
-  init() {
-    // Load existing storage or generate demo workspace
-    this.loadNotes();
-    this.setupEventListeners();
-    this.renderNoteList();
-    this.renderTagsFilter();
-    this.selectNote(this.notes[0]?.id || null);
-    
-    // On tablet and mobile screens, start with the sidebar collapsed for better usability
-    if (window.innerWidth < 1024) {
-      this.dom.sidebar.classList.add('sidebar-closed');
-    }
-
-    // Auto-Save background loop simulation (Visual Indicator Pulse)
-    setInterval(() => {
-      this.triggerVisualPulse();
-    }, 12000);
-  }
-
-  loadNotes() {
-    const rawData = localStorage.getItem('obsidian_lite_notes');
-    if (rawData) {
-      try {
-        this.notes = JSON.parse(rawData);
-      } catch (e) {
-        this.notes = [];
-      }
-    }
-
-    if (this.notes.length === 0) {
-      // First-time load: Setup beautifully rich starter documents
-      this.notes = [
-        {
-          id: 'welcome-note-id',
-          title: 'Welcome to Obsidian Lite 2026 🪐',
-          content: `# Welcome to Obsidian Lite 2026 🪐
-
-This is a premium, high-fidelity single-page **Markdown Editor** crafted with pure vanilla ES6 and Tailwind CSS.
-
-## 🚀 Key Features Included
-
-- **Side-by-Side Dual Pane**: Live preview updates instantly as you type.
-- **Robust Client-side CRUD**: All notes are synchronized continuously to your local browser storage.
-- **Interactive Checkboxes**: Try checking/unchecking items directly inside the preview layout!
-- **Word & Read-Time Tracker**: Instant metadata stats keep you informed.
-- **Template Injector**: Drop customizable structured starter templates with a single click.
-- **Interactive Tags**: Organize your collection by adding custom tags in the header.
-
-## 📝 Markdown Quick Reference
-
-### Beautiful Standard Tables
-| Product Variant | Category | Status |
-| :--- | :--- | :---: |
-| Obsidian Premium | Workspace | Vibrant |
-| Tail-wind Styling | Framework | Active |
-
-### Blockquotes & Custom Highlights
-> "This workspace changes how you prioritize information. Absolute minimalist comfort."
-Use ==double equals== to highlight important passages.
-
-## 🛠️ Interactive Tasks Checklist
-- [x] Experience smooth elastic transitions
-- [ ] Create your first custom note
-- [ ] Toggle the sidebar view on mobile layouts`,
-          tags: ['guide', 'workspace'],
-          updatedAt: new Date('2026-03-31T10:00:00.000Z').getTime()
-        },
-        {
-          id: 'demo-scratchpad',
-          title: 'Immediate Sandbox Scratchpad',
-          content: `# Sandbox Scratchpad 📝
-
-Use this safe space to test custom Markdown styles. Write code blocks, lists, headers, or align tables!
-
-\`\`\`javascript
-// High performance parsing engine
-const render = (text) => {
-  return MarkdownEngine.parse(text);
-};
-console.log("Ready for 2026 workflows!");
+console.log("Workspace initialized successfully!");
 \`\`\`
 
-- [ ] Unfinished checklist element
-- [ ] Draft system documentation structure`,
-          tags: ['sandbox', 'scratch'],
-          updatedAt: new Date('2026-03-31T09:45:00.000Z').getTime()
-        }
-      ];
-      this.saveNotesToStorage();
+> Notice how the compiler automatically scanned the JavaScript signatures and labeled the code block badge as "JAVASCRIPT" without any manually specified language identifier!
+
+## Live Checklist Features
+- [x] Create some beautiful code blocks to test heuristic scanning
+- [ ] Try writing SQL queries or CSS styles and watch the compiler label them
+- [ ] Connect with standard markup cheatsheets
+
+Feel free to write tables, custom blockquotes, and explore the template injections above.`,
+    tags: 'welcome, onboarding, markdown',
+    updatedAt: Date.now()
+  },
+  {
+    id: 'note-2',
+    title: 'Architecture Blueprint v2026',
+    content: `# Architecture Blueprint v2026
+
+Below is a CSS codeblock. Notice how the heuristic compiler scans custom style selectors and styles them accurately under CSS labels:
+
+\`\`\`
+.obsidian-preview table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  margin: 2rem 0;
+}
+\`\`\`
+
+## Schema Models
+Below is a simple database model written in raw SQL. The real-time parser identifies standard statements automatically:
+
+\`\`\`
+SELECT account_id, username, email FROM system_accounts WHERE status = 'active';
+\`\`\``,
+    tags: 'architecture, blueprint, css',
+    updatedAt: Date.now() - 3600000
+  }
+];
+
+const TEMPLATES = {
+  daily: `# Daily Strategy Log - ${new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}
+## Focus Areas
+- [ ] Implement robust microservice endpoints
+- [ ] Review system diagnostic logs
+- [ ] Coordinate with architecture team
+
+## Technical Notes
+\`\`\`
+const coreConfig = {
+  environment: "production",
+  port: 8080,
+  syncInterval: 30000
+};
+console.log("System initialized on port", coreConfig.port);
+\`\`\`
+
+## Quick Review
+What went well today? What needs attention tomorrow?`,
+
+  weekly: `# Weekly Blueprints - Year 2026
+## Deliverables Completed
+- [x] Initial proof of concept parsed models
+- [x] High-fidelity custom scroll integrations
+
+## Next Objectives
+- [ ] Complete heuristic language auto-detection models
+- [ ] Optimize styling layouts for responsive displays
+
+## Database Migration Script Draft
+\`\`\`
+SELECT user_id, email, created_at 
+FROM accounts 
+WHERE active = 1 
+ORDER BY created_at DESC;
+\`\`\`
+
+## Summary Report`,
+
+  project: `# Project Specs Draft - Obsidian Lite
+## Core Technologies
+- HTML5 Canvas & SVG Layering
+- Dynamic real-time Markdown Parsing
+- LocalStorage state management
+
+## Architecture Interface Code
+\`\`\`
+body {
+  margin: 0;
+  background-color: #0b0f17;
+  color: #f3f4f6;
+  font-family: 'Inter', sans-serif;
+}
+.obsidian-preview {
+  line-height: 1.7;
+}
+\`\`\`
+
+## Key Milestones
+- [ ] Integrate real-time code scanning heuristics
+- [ ] Establish unified multi-pane layout`,
+
+  meeting: `# Meeting Schedule Agenda
+## Participants
+- Lead System Engineer
+- Frontend UX Architect
+
+## Discussion Points
+1. Address the live preview container scrolling issues
+2. Discuss disabling global dashboard technology badges in favor of inline language codeblock heuristics
+
+## JavaScript Action Steps
+\`\`\`
+function handleChecklistChange(lineIndex, isChecked) {
+  const lines = currentNote.content.split('\\n');
+  lines[lineIndex] = isChecked ? "- [x] Finished task" : "- [ ] Incomplete task";
+}
+\`\`\`
+
+## Notes`
+};
+
+// Application State
+let notes = JSON.parse(localStorage.getItem('obsidian_lite_notes')) || DEFAULT_NOTES;
+let currentNoteId = localStorage.getItem('obsidian_lite_current_id') || (notes.length > 0 ? notes[0].id : null);
+let selectedTagFilter = null;
+
+// DOM Selectors
+const sidebar = document.getElementById('sidebar');
+const sidebarToggleBtn = document.getElementById('sidebarToggleBtn');
+const sidebarCloseBtn = document.getElementById('sidebarCloseBtn');
+const searchInput = document.getElementById('searchInput');
+const createNoteBtn = document.getElementById('createNoteBtn');
+const tagsFilterList = document.getElementById('tagsFilterList');
+const noteList = document.getElementById('noteList');
+const noteTitleInput = document.getElementById('noteTitleInput');
+const templateSelect = document.getElementById('templateSelect');
+const cheatSheetToggle = document.getElementById('cheatSheetToggle');
+const saveIndicator = document.getElementById('saveIndicator');
+const deleteNoteBtn = document.getElementById('deleteNoteBtn');
+const noteTagsInput = document.getElementById('noteTagsInput');
+const tabEdit = document.getElementById('tabEdit');
+const tabPreview = document.getElementById('tabPreview');
+const editorPane = document.getElementById('editorPane');
+const previewPaneContainer = document.getElementById('previewPaneContainer');
+const previewPane = document.getElementById('previewPane');
+const statsWords = document.getElementById('statsWords');
+const statsChars = document.getElementById('statsChars');
+const statsReadTime = document.getElementById('statsReadTime');
+const cheatSheetModal = document.getElementById('cheatSheetModal');
+const closeCheatsheetBtns = document.querySelectorAll('.close-cheatsheet-btn');
+const editorInput = document.getElementById('editorInput');
+
+// Guaranteed scrollability setup
+if (previewPane) {
+  previewPane.style.overflowY = 'auto';
+  previewPane.style.height = '100%';
+  previewPane.style.webkitOverflowScrolling = 'touch';
+  previewPane.style.pointerEvents = 'auto';
+}
+
+// Initialize Application
+function init() {
+  renderSidebarNotes();
+  renderTagsFilter();
+  loadNote(currentNoteId);
+  setupEventListeners();
+}
+
+// Render list of note filecards
+function renderSidebarNotes() {
+  const query = searchInput.value.toLowerCase().trim();
+  let filtered = notes;
+
+  if (query) {
+    filtered = filtered.filter(n => 
+      n.title.toLowerCase().includes(query) || 
+      n.content.toLowerCase().includes(query) ||
+      n.tags.toLowerCase().includes(query)
+    );
+  }
+
+  if (selectedTagFilter) {
+    filtered = filtered.filter(n => 
+      n.tags.split(',').map(t => t.trim().toLowerCase()).includes(selectedTagFilter)
+    );
+  }
+
+  // Sort by updatedAt descending
+  filtered.sort((a, b) => b.updatedAt - a.updatedAt);
+
+  noteList.innerHTML = '';
+  
+  if (filtered.length === 0) {
+    noteList.innerHTML = `
+      <div class="text-center py-6 text-zinc-500 text-xs">
+        No documents found
+      </div>
+    `;
+    return;
+  }
+
+  filtered.forEach(note => {
+    const isActive = note.id === currentNoteId;
+    const itemCard = document.createElement('div');
+    itemCard.className = `file-card p-3 rounded-lg relative cursor-pointer smooth-transition ${isActive ? 'active bg-[#1f293d]/50 border-violet-500/30' : 'hover:bg-zinc-800/40'}`;
+    
+    // Quick preview snippet
+    const snippet = note.content
+      .replace(/[#*`>_-]/g, '')
+      .substring(0, 75) + (note.content.length > 75 ? '...' : '');
+
+    // Render tags
+    const tagsArr = note.tags.split(',').map(t => t.trim()).filter(Boolean);
+    const tagsMarkup = tagsArr.map(t => `
+      <span class="px-1.5 py-0.5 rounded text-[9px] font-mono bg-zinc-800 text-zinc-400 border border-zinc-700/50 hover:text-violet-300 transition-colors">${t}</span>
+    `).join('');
+
+    itemCard.innerHTML = `
+      <div class="flex items-start justify-between gap-1.5">
+        <h4 class="font-semibold text-xs text-zinc-200 truncate ${isActive ? 'text-violet-300' : ''}">${escapeHTML(note.title || 'Untitled Note')}</h4>
+        <span class="text-[9px] text-zinc-500 shrink-0 font-mono">${new Date(note.updatedAt).toLocaleDateString(undefined, {month: 'short', day: 'numeric'})}</span>
+      </div>
+      <p class="text-[10px] text-zinc-400 line-clamp-2 mt-1 leading-relaxed font-sans">${escapeHTML(snippet || 'No additional content')}</p>
+      ${tagsMarkup ? `<div class="flex flex-wrap gap-1 mt-2">${tagsMarkup}</div>` : ''}
+    `;
+
+    itemCard.addEventListener('click', () => {
+      loadNote(note.id);
+      // On mobile, automatically show the preview side when selecting
+      if (window.innerWidth < 1024) {
+        showTab('preview');
+      }
+    });
+
+    noteList.appendChild(itemCard);
+  });
+}
+
+// Render dynamic tag counts and elements
+function renderTagsFilter() {
+  const counts = {};
+  notes.forEach(note => {
+    if (!note.tags) return;
+    note.tags.split(',').forEach(tag => {
+      const clean = tag.trim().toLowerCase();
+      if (clean) {
+        counts[clean] = (counts[clean] || 0) + 1;
+      }
+    });
+  });
+
+  tagsFilterList.innerHTML = '';
+
+  // All category option
+  const allBtn = document.createElement('button');
+  allBtn.className = `w-full text-left text-[11px] py-1 px-2 rounded font-medium smooth-transition flex justify-between items-center ${!selectedTagFilter ? 'bg-violet-950/30 text-violet-300 border-l-2 border-violet-500 pl-1.5' : 'text-zinc-400 hover:text-zinc-200 hover:bg-zinc-800/40'}`;
+  allBtn.innerHTML = `<span>📂 All Documents</span> <span class="text-[9px] font-mono opacity-60">${notes.length}</span>`;
+  allBtn.addEventListener('click', () => {
+    selectedTagFilter = null;
+    renderTagsFilter();
+    renderSidebarNotes();
+  });
+  tagsFilterList.appendChild(allBtn);
+
+  // Dynamic lists tags
+  Object.keys(counts).sort().forEach(tag => {
+    const isSelected = tag === selectedTagFilter;
+    const tagBtn = document.createElement('button');
+    tagBtn.className = `w-full text-left text-[11px] py-1 px-2 rounded font-medium smooth-transition flex justify-between items-center ${isSelected ? 'bg-violet-950/30 text-violet-300 border-l-2 border-violet-500 pl-1.5' : 'text-zinc-400 hover:text-zinc-200 hover:bg-zinc-800/40'}`;
+    tagBtn.innerHTML = `<span># ${tag}</span> <span class="text-[9px] font-mono opacity-60">${counts[tag]}</span>`;
+    tagBtn.addEventListener('click', () => {
+      selectedTagFilter = isSelected ? null : tag;
+      renderTagsFilter();
+      renderSidebarNotes();
+    });
+    tagsFilterList.appendChild(tagBtn);
+  });
+}
+
+// Load a document into editor pane and live preview compiled
+function loadNote(id) {
+  const note = notes.find(n => n.id === id);
+  if (!note) {
+    // Fallback if currentNoteId not found
+    if (notes.length > 0) {
+      loadNote(notes[0].id);
+    } else {
+      currentNoteId = null;
+      disableWorkspace();
     }
+    return;
   }
 
-  saveNotesToStorage() {
-    localStorage.setItem('obsidian_lite_notes', JSON.stringify(this.notes));
-  }
+  currentNoteId = id;
+  localStorage.setItem('obsidian_lite_current_id', id);
 
-  setupEventListeners() {
-    // 1. Live Input Parsing
-    this.dom.editorInput.addEventListener('input', () => {
-      if (!this.activeNoteId) return;
-      const active = this.notes.find(n => n.id === this.activeNoteId);
-      if (active) {
-        active.content = this.dom.editorInput.value;
-        active.updatedAt = Date.now();
-        this.updatePreviewAndMetadata();
-        this.debouncedSave();
-      }
-    });
+  // Enable Inputs
+  noteTitleInput.disabled = false;
+  noteTagsInput.disabled = false;
+  editorInput.disabled = false;
+  deleteNoteBtn.disabled = false;
 
-    // 2. Title and Tag updates
-    this.dom.noteTitleInput.addEventListener('input', () => {
-      if (!this.activeNoteId) return;
-      const active = this.notes.find(n => n.id === this.activeNoteId);
-      if (active) {
-        active.title = this.dom.noteTitleInput.value || 'Untitled Note';
-        active.updatedAt = Date.now();
-        this.renderNoteList();
-        this.debouncedSave();
-      }
-    });
+  // Bind values
+  noteTitleInput.value = note.title;
+  noteTagsInput.value = note.tags;
+  editorInput.value = note.content;
 
-    this.dom.noteTagsInput.addEventListener('change', () => {
-      if (!this.activeNoteId) return;
-      const active = this.notes.find(n => n.id === this.activeNoteId);
-      if (active) {
-        const rawTags = this.dom.noteTagsInput.value;
-        active.tags = rawTags.split(',')
-          .map(t => t.trim().toLowerCase())
-          .filter(t => t.length > 0);
-        active.updatedAt = Date.now();
-        this.renderTagsFilter();
-        this.renderNoteList();
-        this.debouncedSave();
-      }
-    });
+  // Build Output Preview Compiled Live
+  updatePreviewAndStats();
+  renderSidebarNotes();
+}
 
-    // 3. Search input
-    this.dom.searchInput.addEventListener('input', (e) => {
-      this.searchQuery = e.target.value.toLowerCase();
-      this.renderNoteList();
-    });
+function disableWorkspace() {
+  noteTitleInput.value = '';
+  noteTagsInput.value = '';
+  editorInput.value = '';
+  noteTitleInput.disabled = true;
+  noteTagsInput.disabled = true;
+  editorInput.disabled = true;
+  deleteNoteBtn.disabled = true;
+  previewPane.innerHTML = `<div class="text-zinc-500 italic py-8 text-center">No Document Active. Click "Create New Document" to begin.</div>`;
+  statsWords.innerText = '0';
+  statsChars.innerText = '0';
+  statsReadTime.innerText = '0m';
+}
 
-    // 4. Create & Delete Buttons
-    this.dom.createNoteBtn.addEventListener('click', () => this.createNewNote());
-    this.dom.deleteNoteBtn.addEventListener('click', () => this.deleteActiveNote());
+// Update compiled views, parse markdown heuristics, and calculate footers stats
+function updatePreviewAndStats() {
+  if (!currentNoteId) return;
+  const note = notes.find(n => n.id === currentNoteId);
+  if (!note) return;
 
-    // 5. Sidebar Toggles
-    this.dom.sidebarToggleBtn.addEventListener('click', () => {
-      this.dom.sidebar.classList.toggle('sidebar-closed');
-    });
-    this.dom.sidebarCloseBtn.addEventListener('click', () => {
-      this.dom.sidebar.classList.add('sidebar-closed');
-    });
+  const content = editorInput.value;
+  previewPane.innerHTML = parseMarkdown(content);
 
-    // 6. Template Injector dropdown
-    this.dom.templateSelect.addEventListener('change', (e) => {
-      const selected = e.target.value;
-      if (selected && NOTE_TEMPLATES[selected]) {
-        this.insertTextAtCursor(NOTE_TEMPLATES[selected]);
-        this.dom.templateSelect.value = ''; // Reset selection
-      }
+  // Handle Checklist change interactions in live previewcompiled 
+  const checkBoxes = previewPane.querySelectorAll('.task-checkbox-interactive');
+  checkBoxes.forEach(box => {
+    box.addEventListener('change', (e) => {
+      const lineIndex = parseInt(e.target.getAttribute('data-line'), 10);
+      const lines = editorInput.value.split('\n');
+      const isChecked = e.target.checked;
+      
+      const lineText = lines[lineIndex];
+      // Replace only task state
+      lines[lineIndex] = lineText.replace(/^([-*]\s+\[)([ xX])(\])/, `$1${isChecked ? 'x' : ' '}$3`);
+      
+      editorInput.value = lines.join('\n');
+      triggerSave();
+      updatePreviewAndStats();
     });
+  });
 
-    // 7. Interactive task click handling inside live preview
-    this.dom.previewPane.addEventListener('change', (e) => {
-      if (e.target && e.target.type === 'checkbox' && e.target.hasAttribute('data-task-id')) {
-        const taskId = parseInt(e.target.getAttribute('data-task-id'), 10);
-        const isChecked = e.target.checked;
-        this.toggleTaskInMarkdown(taskId, isChecked);
-      }
-    });
-
-    // 8. Cheat Sheet Dialog Modal
-    this.dom.cheatSheetToggle.addEventListener('click', () => {
-      this.dom.cheatSheetModal.classList.remove('hidden');
-      this.dom.cheatSheetModal.classList.add('flex');
-    });
-    this.dom.closeCheatSheetBtns.forEach(btn => {
-      btn.addEventListener('click', () => {
-        this.dom.cheatSheetModal.classList.add('hidden');
-        this.dom.cheatSheetModal.classList.remove('flex');
+  // Handle Dynamic codeblock copy buttons
+  const copyButtons = previewPane.querySelectorAll('.copy-code-btn');
+  copyButtons.forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      const code = decodeURIComponent(btn.getAttribute('data-code'));
+      navigator.clipboard.writeText(code).then(() => {
+        const textSpan = btn.querySelector('span');
+        const origText = textSpan.innerText;
+        textSpan.innerText = 'Copied!';
+        btn.classList.add('text-emerald-400');
+        setTimeout(() => {
+          textSpan.innerText = origText;
+          btn.classList.remove('text-emerald-400');
+        }, 1500);
       });
     });
-    this.dom.cheatSheetModal.addEventListener('click', (e) => {
-      if (e.target === this.dom.cheatSheetModal) {
-        this.dom.cheatSheetModal.classList.add('hidden');
-        this.dom.cheatSheetModal.classList.remove('flex');
-      }
-    });
+  });
 
-    // 9. Interactive Mobile Tabs switcher (Editor vs. Preview Layouts)
-    this.dom.tabEdit.addEventListener('click', () => {
-      this.dom.tabEdit.classList.add('bg-zinc-800', 'text-white');
-      this.dom.tabEdit.classList.remove('text-zinc-400');
-      this.dom.tabPreview.classList.remove('bg-zinc-800', 'text-white');
-      this.dom.tabPreview.classList.add('text-zinc-400');
+  // Calculate standard diagnostic content metadata counters
+  const words = content ? content.trim().split(/\s+/).filter(Boolean).length : 0;
+  const chars = content ? content.length : 0;
+  const readTime = Math.max(1, Math.ceil(words / 200));
 
-      this.dom.editorPane.classList.remove('hidden');
-      this.dom.previewPaneContainer.classList.add('hidden');
-    });
+  statsWords.innerText = words;
+  statsChars.innerText = chars;
+  statsReadTime.innerText = `${readTime}m`;
+}
 
-    this.dom.tabPreview.addEventListener('click', () => {
-      this.dom.tabPreview.classList.add('bg-zinc-800', 'text-white');
-      this.dom.tabPreview.classList.remove('text-zinc-400');
-      this.dom.tabEdit.classList.remove('bg-zinc-800', 'text-white');
-      this.dom.tabEdit.classList.add('text-zinc-400');
+// Auto-save mechanisms
+let saveTimeout = null;
+function triggerSave() {
+  if (!currentNoteId) return;
 
-      this.dom.previewPaneContainer.classList.remove('hidden');
-      this.dom.editorPane.classList.add('hidden');
-    });
-  }
+  // Show active syncing status
+  const indicatorIndicator = saveIndicator.querySelector('.saving-pulse');
+  const indicatorText = saveIndicator.querySelector('span:last-child');
+  
+  indicatorIndicator.classList.remove('bg-emerald-500');
+  indicatorIndicator.classList.add('bg-amber-500');
+  indicatorText.innerText = 'Saving...';
 
-  // Inject selected templates smoothly where cursor is currently active
-  insertTextAtCursor(text) {
-    const input = this.dom.editorInput;
-    const startPos = input.selectionStart;
-    const endPos = input.selectionEnd;
-    const originalValue = input.value;
+  clearTimeout(saveTimeout);
+  saveTimeout = setTimeout(() => {
+    const note = notes.find(n => n.id === currentNoteId);
+    if (note) {
+      note.title = noteTitleInput.value.trim() || 'Untitled Note';
+      note.tags = noteTagsInput.value.trim();
+      note.content = editorInput.value;
+      note.updatedAt = Date.now();
 
-    const newValue = originalValue.substring(0, startPos) + text + originalValue.substring(endPos, originalValue.length);
-    input.value = newValue;
-    input.focus();
-    input.selectionStart = startPos + text.length;
-    input.selectionEnd = startPos + text.length;
+      localStorage.setItem('obsidian_lite_notes', JSON.stringify(notes));
+      renderSidebarNotes();
+      renderTagsFilter();
 
-    // Trigger update lifecycle
-    if (this.activeNoteId) {
-      const active = this.notes.find(n => n.id === this.activeNoteId);
-      if (active) {
-        active.content = newValue;
-        active.updatedAt = Date.now();
-        this.updatePreviewAndMetadata();
-        this.debouncedSave();
-      }
+      // Complete pulse feedback state
+      indicatorIndicator.classList.remove('bg-amber-500');
+      indicatorIndicator.classList.add('bg-emerald-500');
+      indicatorText.innerText = 'Sync Saved';
     }
-  }
+  }, 600);
+}
 
-  createNewNote() {
+// Event Bindings
+function setupEventListeners() {
+  // Title / Tags Change
+  noteTitleInput.addEventListener('input', triggerSave);
+  noteTagsInput.addEventListener('input', triggerSave);
+  editorInput.addEventListener('input', () => {
+    updatePreviewAndStats();
+    triggerSave();
+  });
+
+  // Document creation trigger action button
+  createNoteBtn.addEventListener('click', () => {
     const newNote = {
-      id: 'note_' + Date.now(),
-      title: 'New Workspace Document',
-      content: `# New Workspace Document\n\nStart your thoughts here...`,
-      tags: ['workspace'],
+      id: 'note-' + Date.now(),
+      title: 'New Document Draft',
+      content: `# New Document Draft\n\nStart writing markdown documents here...`,
+      tags: 'draft',
       updatedAt: Date.now()
     };
-    this.notes.unshift(newNote);
-    this.saveNotesToStorage();
-    this.renderNoteList();
-    this.renderTagsFilter();
-    this.selectNote(newNote.id);
+    notes.unshift(newNote);
+    localStorage.setItem('obsidian_lite_notes', JSON.stringify(notes));
     
-    // Smoothly ensure sidebar is open on Desktop to showcase creation
-    if (window.innerWidth >= 1024) {
-      this.dom.sidebar.classList.remove('sidebar-closed');
-    }
-  }
+    selectedTagFilter = null;
+    renderTagsFilter();
+    renderSidebarNotes();
+    loadNote(newNote.id);
+  });
 
-  deleteActiveNote() {
-    if (!this.activeNoteId) return;
-    if (confirm('Are you absolutely certain you want to delete this note? This action cannot be undone.')) {
-      this.notes = this.notes.filter(n => n.id !== this.activeNoteId);
-      this.saveNotesToStorage();
-      this.renderNoteList();
-      this.renderTagsFilter();
-      this.selectNote(this.notes[0]?.id || null);
-    }
-  }
-
-  selectNote(id) {
-    this.activeNoteId = id;
-    const note = this.notes.find(n => n.id === id);
-
-    if (note) {
-      this.dom.noteTitleInput.value = note.title;
-      this.dom.noteTagsInput.value = note.tags.join(', ');
-      this.dom.editorInput.value = note.content;
-      this.dom.editorInput.disabled = false;
-      this.dom.noteTitleInput.disabled = false;
-      this.dom.noteTagsInput.disabled = false;
-      this.dom.deleteNoteBtn.disabled = false;
-      this.updatePreviewAndMetadata();
-    } else {
-      // Empty slate default state
-      this.dom.noteTitleInput.value = '';
-      this.dom.noteTagsInput.value = '';
-      this.dom.editorInput.value = '';
-      this.dom.editorInput.disabled = true;
-      this.dom.noteTitleInput.disabled = true;
-      this.dom.noteTagsInput.disabled = true;
-      this.dom.deleteNoteBtn.disabled = true;
-      this.dom.previewPane.innerHTML = `<div class="flex flex-col items-center justify-center h-full text-zinc-500 py-20"><svg class="w-12 h-12 mb-3 text-zinc-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path></svg><p>No active note selected. Create a new note to start building.</p></div>`;
+  // Delete current active document action button
+  deleteNoteBtn.addEventListener('click', () => {
+    if (!currentNoteId) return;
+    if (confirm('Are you absolutely sure you want to permanently delete this document?')) {
+      notes = notes.filter(n => n.id !== currentNoteId);
+      localStorage.setItem('obsidian_lite_notes', JSON.stringify(notes));
       
-      this.dom.statsWords.textContent = '0';
-      this.dom.statsChars.textContent = '0';
-      this.dom.statsReadTime.textContent = '0m';
+      currentNoteId = notes.length > 0 ? notes[0].id : null;
+      selectedTagFilter = null;
+      renderTagsFilter();
+      renderSidebarNotes();
       
-      const panel = document.getElementById('techContextPanel');
-      if (panel) panel.classList.add('hidden');
-    }
-
-    this.renderNoteList();
-  }
-
-  // Finds N-th checkbox item in raw Markdown and toggles its state
-  toggleTaskInMarkdown(index, isChecked) {
-    const note = this.notes.find(n => n.id === this.activeNoteId);
-    if (!note) return;
-
-    let currentMatchIndex = 0;
-    const lines = note.content.split('\n');
-
-    for (let i = 0; i < lines.length; i++) {
-      const line = lines[i];
-      if (/^[ \t]*-\s+\[([ xX])\]\s+/.test(line)) {
-        if (currentMatchIndex === index) {
-          lines[i] = line.replace(/(\[[ xX]\])/, isChecked ? '[x]' : '[ ]');
-          break;
-        }
-        currentMatchIndex++;
-      }
-    }
-
-    note.content = lines.join('\n');
-    this.dom.editorInput.value = note.content;
-    this.updatePreviewAndMetadata();
-    this.saveNotesToStorage();
-    this.triggerSaveIndicator();
-  }
-
-  // Identifies user framework stack context in real-time
-  analyzeTechStack(content) {
-    const text = (content || '').toLowerCase();
-    const badges = [];
-
-    const detectors = [
-      { id: 'react', name: 'React', color: 'bg-cyan-500/10 text-cyan-400 border-cyan-500/30', keywords: ['react', 'jsx', 'usestate', 'useeffect', 'createcontext'] },
-      { id: 'vue', name: 'Vue.js', color: 'bg-emerald-500/10 text-emerald-400 border-emerald-500/30', keywords: ['vue', 'v-model', 'v-for', 'v-if', 'ref(', 'computed('] },
-      { id: 'svelte', name: 'Svelte', color: 'bg-orange-500/10 text-orange-400 border-orange-500/30', keywords: ['svelte', 'onmount', 'export let'] },
-      { id: 'angular', name: 'Angular', color: 'bg-red-500/10 text-red-400 border-red-500/30', keywords: ['angular', '@component', 'ngmodule', 'rxjs'] },
-      { id: 'tailwind', name: 'Tailwind CSS', color: 'bg-sky-500/10 text-sky-400 border-sky-500/30', keywords: ['tailwind', 'tailwindcss', 'flex', 'grid', 'justify-'] },
-      { id: 'python', name: 'Python', color: 'bg-yellow-500/10 text-yellow-400 border-yellow-500/30', keywords: ['def ', 'import ', 'print(', 'pip install', 'django', 'flask'] },
-      { id: 'django', name: 'Django', color: 'bg-emerald-600/10 text-emerald-300 border-emerald-600/30', keywords: ['django', 'models.model', 'urlpatterns'] },
-      { id: 'rails', name: 'Ruby on Rails', color: 'bg-red-600/10 text-red-300 border-red-600/30', keywords: ['rails', 'active_record', 'gem ', 'def index'] },
-      { id: 'nodejs', name: 'Node.js', color: 'bg-green-500/10 text-green-400 border-green-500/30', keywords: ['node', 'require(', 'module.exports', 'npm install', 'express'] },
-      { id: 'javascript', name: 'Vanilla JS', color: 'bg-yellow-400/10 text-yellow-300 border-yellow-400/30', keywords: ['const ', 'let ', 'function', '=>', 'vanilla', 'addeventlistener', 'document.getelementbyid'] },
-      { id: 'typescript', name: 'TypeScript', color: 'bg-blue-500/10 text-blue-400 border-blue-500/30', keywords: ['interface ', 'type ', ': string', ': number', 'as ', 'readonly'] },
-      { id: 'rust', name: 'Rust', color: 'bg-amber-600/10 text-amber-300 border-amber-600/30', keywords: ['fn main()', 'impl ', 'let mut', 'match ', 'cargo'] },
-      { id: 'go', name: 'Go', color: 'bg-sky-400/10 text-sky-300 border-sky-400/30', keywords: ['func main()', 'package main', 'import "fmt"'] }
-    ];
-
-    detectors.forEach(d => {
-      const matched = d.keywords.some(keyword => text.includes(keyword));
-      if (matched) {
-        badges.push(d);
-      }
-    });
-
-    const panel = document.getElementById('techContextPanel');
-    const container = document.getElementById('techStackBadges');
-
-    if (panel && container) {
-      if (badges.length > 0) {
-        panel.classList.remove('hidden');
-        container.innerHTML = badges.map(b => `
-          <span class="px-2 py-0.5 rounded text-[10px] font-semibold border ${b.color} transition duration-150 hover:scale-105 cursor-default uppercase tracking-wider">
-            ${b.name}
-          </span>
-        `).join('');
+      if (currentNoteId) {
+        loadNote(currentNoteId);
       } else {
-        panel.classList.add('hidden');
-        container.innerHTML = '';
+        disableWorkspace();
       }
     }
-  }
+  });
 
-  updatePreviewAndMetadata() {
-    const note = this.notes.find(n => n.id === this.activeNoteId);
-    if (!note) return;
+  // Live document searching
+  searchInput.addEventListener('input', () => {
+    renderSidebarNotes();
+  });
 
-    // Convert Markdown to interactive premium HTML
-    const htmlContent = MarkdownEngine.parse(note.content);
-    this.dom.previewPane.innerHTML = htmlContent;
-
-    // Analyze framework stacks context in real-time
-    this.analyzeTechStack(note.content);
-
-    // Compute Word Counts & Estimated Reading Duration Metrics
-    const rawText = note.content || '';
-    const cleanWords = rawText.trim().split(/\s+/).filter(w => w.length > 0);
-    const wordCount = cleanWords.length;
-    const charCount = rawText.length;
-    const readDuration = Math.max(1, Math.ceil(wordCount / 200));
-
-    this.dom.statsWords.textContent = wordCount.toLocaleString();
-    this.dom.statsChars.textContent = charCount.toLocaleString();
-    this.dom.statsReadTime.textContent = `${readDuration}m`;
-  }
-
-  debouncedSave() {
-    this.dom.saveIndicator.innerHTML = `
-      <span class="inline-block w-2.5 h-2.5 rounded-full bg-amber-500 mr-2 animate-ping"></span>
-      <span class="text-xs text-zinc-400 font-medium">Pending changes...</span>
-    `;
-
-    clearTimeout(this.saveTimeout);
-    this.saveTimeout = setTimeout(() => {
-      this.saveNotesToStorage();
-      this.triggerSaveIndicator();
-    }, 1000);
-  }
-
-  triggerSaveIndicator() {
-    this.dom.saveIndicator.innerHTML = `
-      <span class="inline-block w-2.5 h-2.5 rounded-full bg-emerald-500 mr-2 saving-pulse"></span>
-      <span class="text-xs text-zinc-300 font-semibold tracking-wide uppercase">Sync Saved</span>
-    `;
-  }
-
-  triggerVisualPulse() {
-    // Keeps visual micro-interaction alive on dashboard periodically
-    if (this.dom.saveIndicator.querySelector('.saving-pulse')) return;
-    this.dom.saveIndicator.classList.add('opacity-40');
-    setTimeout(() => {
-      this.dom.saveIndicator.classList.remove('opacity-40');
-    }, 1000);
-  }
-
-  renderTagsFilter() {
-    // Generate active tags list for filters sidebar view
-    const allTagsMap = {};
-    this.notes.forEach(note => {
-      if (Array.isArray(note.tags)) {
-        note.tags.forEach(t => {
-          allTagsMap[t] = (allTagsMap[t] || 0) + 1;
-        });
+  // Template Injection Selection trigger dropdown
+  templateSelect.addEventListener('change', (e) => {
+    const val = e.target.value;
+    if (val && TEMPLATES[val] && currentNoteId) {
+      if (confirm('Overwrite current contents with chosen template draft specifications?')) {
+        editorInput.value = TEMPLATES[val];
+        noteTitleInput.value = val.charAt(0).toUpperCase() + val.slice(1) + ' Workspace Log';
+        updatePreviewAndStats();
+        triggerSave();
       }
-    });
-
-    const uniqueTags = Object.keys(allTagsMap).sort();
-
-    let filterHtml = `
-      <button data-tag-val="" class="w-full text-left px-3 py-1.5 rounded-md text-xs font-semibold uppercase tracking-wider transition ${
-        this.selectedTagFilter === '' ? 'bg-violet-600/30 border border-violet-500 text-violet-300' : 'text-zinc-400 hover:text-white hover:bg-zinc-800'
-      }">
-        ⭐ Show All Documents
-      </button>
-    `;
-
-    uniqueTags.forEach(tag => {
-      const isActive = this.selectedTagFilter === tag;
-      const count = allTagsMap[tag];
-      filterHtml += `
-        <button data-tag-val="${tag}" class="flex items-center justify-between w-full text-left px-3 py-1.5 rounded-md text-xs transition ${
-          isActive ? 'bg-violet-600/30 border border-violet-500 text-violet-300 font-semibold' : 'text-zinc-400 hover:text-white hover:bg-zinc-800'
-        }">
-          <span>#${tag}</span>
-          <span class="bg-zinc-800 px-1.5 py-0.5 rounded text-[10px] text-zinc-500 font-mono">${count}</span>
-        </button>
-      `;
-    });
-
-    this.dom.tagsFilterList.innerHTML = filterHtml;
-
-    // Attach click filters
-    this.dom.tagsFilterList.querySelectorAll('button').forEach(btn => {
-      btn.addEventListener('click', (e) => {
-        const targetBtn = e.currentTarget;
-        this.selectedTagFilter = targetBtn.getAttribute('data-tag-val');
-        this.renderTagsFilter();
-        this.renderNoteList();
-      });
-    });
-  }
-
-  renderNoteList() {
-    // Filter notes on Search Criteria and selected tags
-    const filtered = this.notes.filter(note => {
-      const matchSearch = note.title.toLowerCase().includes(this.searchQuery) || 
-                          note.content.toLowerCase().includes(this.searchQuery);
-      
-      const matchTag = this.selectedTagFilter === '' || 
-                       (Array.isArray(note.tags) && note.tags.includes(this.selectedTagFilter));
-
-      return matchSearch && matchTag;
-    });
-
-    if (filtered.length === 0) {
-      this.dom.noteList.innerHTML = `
-        <div class="text-center text-zinc-600 text-xs py-10 px-4">
-          No matching notes found.<br>Try clearing filters.
-        </div>
-      `;
-      return;
+      e.target.value = ''; // Reset select tag index values
     }
+  });
 
-    let listHtml = '';
-    filtered.forEach(note => {
-      const isActive = note.id === this.activeNoteId;
-      const cleanSnippet = note.content
-        .replace(/[#*`~=|\[\]]/g, '') // remove markdown symbols for display snippet
-        .substring(0, 65) + '...';
+  // Sidebar Layout Collapse & Slide view actions
+  sidebarToggleBtn.addEventListener('click', () => {
+    sidebar.classList.toggle('-translate-x-full');
+    sidebar.classList.toggle('lg:translate-x-0');
+  });
 
-      const tagChips = note.tags.map(t => `
-        <span class="bg-zinc-800/80 text-[9px] text-zinc-400 px-1.5 py-0.5 rounded uppercase tracking-wider font-semibold">#${t}</span>
-      `).join(' ');
+  sidebarCloseBtn.addEventListener('click', () => {
+    sidebar.classList.add('-translate-x-full');
+  });
 
-      const formattedDate = new Date(note.updatedAt).toLocaleDateString('en-US', {
-        month: 'short',
-        day: 'numeric',
-        year: 'numeric'
-      });
+  // Cheatsheet Reference Manual trigger modal actions
+  cheatSheetToggle.addEventListener('click', () => {
+    cheatSheetModal.classList.remove('hidden');
+    cheatSheetModal.classList.add('flex');
+  });
 
-      listHtml += `
-        <div data-note-id="${note.id}" class="file-card relative p-4 mb-2.5 rounded-lg cursor-pointer flex flex-col gap-2 ${
-          isActive ? 'active bg-zinc-800/50 border-violet-500' : 'bg-zinc-900/40'
-        }">
-          <div class="flex justify-between items-start">
-            <h3 class="font-bold text-sm text-zinc-100 truncate pr-2 w-full">${note.title || 'Untitled Note'}</h3>
-            <span class="text-[10px] text-zinc-500 whitespace-nowrap font-mono">${formattedDate}</span>
-          </div>
-          <p class="text-xs text-zinc-400 line-clamp-2 leading-relaxed h-8 overflow-hidden">${cleanSnippet}</p>
-          <div class="flex flex-wrap gap-1 mt-1">
-            ${tagChips}
-          </div>
-        </div>
-      `;
+  closeCheatsheetBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      cheatSheetModal.classList.add('hidden');
+      cheatSheetModal.classList.remove('flex');
     });
+  });
 
-    this.dom.noteList.innerHTML = listHtml;
+  // Mobile layout switch tabs
+  tabEdit.addEventListener('click', () => showTab('edit'));
+  tabPreview.addEventListener('click', () => showTab('preview'));
+}
 
-    // Attach click events
-    this.dom.noteList.querySelectorAll('.file-card').forEach(card => {
-      card.addEventListener('click', (e) => {
-        const noteId = e.currentTarget.getAttribute('data-note-id');
-        this.selectNote(noteId);
-        
-        // Auto-close sidebar on small screens (mobile view behavior)
-        if (window.innerWidth < 1024) {
-          this.dom.sidebar.classList.add('sidebar-closed');
-        }
-      });
-    });
+// Mobile responsive tab switcher display logic
+function showTab(tab) {
+  if (tab === 'edit') {
+    tabEdit.classList.add('bg-zinc-800', 'text-white');
+    tabEdit.classList.remove('text-zinc-400');
+    tabPreview.classList.remove('bg-zinc-800', 'text-white');
+    tabPreview.classList.add('text-zinc-400');
+
+    editorPane.classList.remove('hidden');
+    editorPane.classList.add('flex');
+    previewPaneContainer.classList.add('hidden');
+    previewPaneContainer.classList.remove('lg:flex');
+  } else {
+    tabPreview.classList.add('bg-zinc-800', 'text-white');
+    tabPreview.classList.remove('text-zinc-400');
+    tabEdit.classList.remove('bg-zinc-800', 'text-white');
+    tabEdit.classList.add('text-zinc-400');
+
+    previewPaneContainer.classList.remove('hidden');
+    previewPaneContainer.classList.add('flex', 'lg:flex');
+    editorPane.classList.add('hidden');
+    editorPane.classList.remove('flex');
   }
 }
 
-// Instantiate Premium App Workspace Engine once DOM structure has loaded
-document.addEventListener('DOMContentLoaded', () => {
-  window.MarkdownWorkspace = new AppController();
-});
+// On DOM load complete
+window.addEventListener('DOMContentLoaded', init);
